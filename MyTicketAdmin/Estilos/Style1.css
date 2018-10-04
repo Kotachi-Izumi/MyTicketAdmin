@@ -1,0 +1,45 @@
+﻿body {
+    
+    
+    background-color:aqua;
+    margin: 0 auto;
+    max-width:100%;
+    max-height:100%;
+
+}
+
+#login {
+    margin-top:5%;
+    margin-left: 40%;
+    margin-right: 40%;
+    border:groove;  
+    border-radius:10px;
+    width:270px;
+    height:100px;
+    background-color:darkgoldenrod;
+    padding:30px;
+    box-shadow: inset -1px 1px 10px #000000;
+}
+#trUp{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#trDown{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;    
+}
+#lbRecUs{
+    text-decoration:underline;
+    text-underline-position:auto;
+}
+#lbOlvPass{
+    text-decoration:underline;
+}
+#titulo{
+    text-align:center;
+    text-decoration:wavy;
+    font-size:70px;
+    font-weight:600;
+    font-family:'Franklin Gothic';
+    outline-color:aliceblue;
+    outline-style:groove;
+    box-shadow: unset 3px 10px rgb(12, 14, 104);
+}
