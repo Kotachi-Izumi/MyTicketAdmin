@@ -106,6 +106,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Images\banner.PNG" />
+    <Content Include="Images\banner2.PNG" />
+    <Content Include="Images\banner3.PNG" />
+    <Content Include="Images\banner4.PNG" />
     <Content Include="Images\logo ticket.jpg" />
     <Content Include="Estilos\Style1.css" />
     <Content Include="Web.config" />
