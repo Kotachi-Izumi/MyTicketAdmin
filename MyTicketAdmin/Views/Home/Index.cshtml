@@ -9,29 +9,30 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
+    
     <link rel="stylesheet" href="~/Estilos/Style1.css" />
 </head>
 <body>
     <div id="cabecera">
-        
-        <img id="imgCabe" src="~/Images/banner2.PNG"/>
+        <p id="titulo"><strong>My Ticket Admin</strong></p>
+       <!-- <img id="imgCabe" src="~/Images/banner2.PNG"/>-->
     </div>
-    <div id="login" > 
-        <form id="frmLogin" >
-            <table id="tblLogin">
-                <tr id="trUp">
+    <div id="login" class="login-cl"> 
+        <form id="frmLogin" class="login-cl" method="post" action="\Home\btnEnviar" >
+            <table id="tblLogin" class="login-cl">
+                <tr id="trUp" class="login-cl">
                     <td><label for="inUsuario"><strong>Usuario:</strong> </label></td>
                     <td><input type="text" name="inUsuario" placeholder="Ingrese usuario" required/></td>
                 </tr>
-                <tr id="trDown">
+                <tr id="trDown" class="login-cl">
                     <td><label for="inPass"><strong>Contraseña:</strong> </label></td>
                     <td><input type="password" name="inpPass" placeholder="********" required/></td>
                 </tr>
-                <tr>
+                <tr class="login-cl">
                     <td><input type="checkbox" id="ckbRecUs" /><label for="ckbRecUs" id="lbRecUs">Recordar</label></td>
                     <td><button type="submit" name="btnEnviar" id="btnEnviar"><strong>Entrar</strong></button></td>
                 </tr>
-                <tr>
+                <tr class="login-cl">
                     <td colspan="2"><label id="lbOlvPass">Olvido su contraseña</label></td>
                 </tr>
             </table>

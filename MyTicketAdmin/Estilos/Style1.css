@@ -1,22 +1,27 @@
 ﻿body {
     background-color:rgb(21,36,60);
     background-image:url("/Images/fondo2.PNG");
-    margin: 0 auto;
     max-width:100%;
     max-height:100%;
 }
 
 #login {
+    display:block;
     margin-top:5%;
-    margin-left: 40%;
-    margin-right: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    position:relative;
+    display:block;
     border:groove;  
     border-radius:10px;
-    width:270px;
-    height:100px;
+    max-height:inherit;
+    max-width:80%;
+    width:auto;
+    height:auto;
     background-color:ThreeDDarkShadow;
     padding:30px;
     box-shadow: inset -1px 1px 10px #000000;
+    
 }
 #trUp{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -34,7 +39,8 @@
 #titulo{
     text-align:center;
     text-decoration:wavy;
-    font-size:70px;
+    color:aliceblue;
+    font-size:xx-large;
     font-weight:600;
     font-family:'Franklin Gothic';
     outline-color:aliceblue;
@@ -45,4 +51,18 @@
     text-align:center;
     max-width:100%;
     max-height:100%;
+}
+#frmLogin{
+    max-height:100%;
+    max-width:100%;
+    
+}
+input{
+    width:100%;  
+    margin:0 auto; 
+   
+}
+.login-cl{
+    
+    margin:0 auto;
 }

@@ -13,5 +13,13 @@ namespace MyTicketAdmin.Controllers
         {
             return View();
         }
+        public ActionResult btnEnviar()
+        {
+            ConPG con = new ConPG();
+            con.abrirConexion();
+            con.agregar();
+            con.cerrarConexion();
+            return null;       
+        }
     }
 }
