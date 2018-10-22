@@ -5,7 +5,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="es-cl">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
@@ -15,18 +15,29 @@
 <body>
     <div id="cabecera">
         <p id="titulo"><strong>My Ticket Admin</strong></p>
-       <!-- <img id="imgCabe" src="~/Images/banner2.PNG"/>-->
     </div>
+    <header id="headerPrincipal">
+        <table>
+            <tr>
+                <td>
+                    <h3>@Html.ActionLink(" Registro ", "Registro", "Register")</h3>
+                </td>
+                <td>
+                    <h3>@Html.ActionLink(" Rol ", "AsigRol", "Register")</h3>
+                </td>
+            </tr>
+        </table>
+    </header>
     <div id="login" class="login-cl"> 
-        <form id="frmLogin" class="login-cl" method="post" action="\Home\btnEnviar" >
+        <form id="frmLogin" class="login-cl" method="post" runat="server" action="\Home\btnEnviar" >
             <table id="tblLogin" class="login-cl">
                 <tr id="trUp" class="login-cl">
                     <td><label for="inUsuario"><strong>Usuario:</strong> </label></td>
-                    <td><input type="text" name="inUsuario" placeholder="Ingrese usuario" required/></td>
+                    <td><input type="text" name="inUsuario" id="inUsuario" placeholder="Ingrese usuario" required/></td>
                 </tr>
                 <tr id="trDown" class="login-cl">
                     <td><label for="inPass"><strong>Contraseña:</strong> </label></td>
-                    <td><input type="password" name="inpPass" placeholder="********" required/></td>
+                    <td><input type="password" name="inpPass" id="inPass" placeholder="********" required/></td>
                 </tr>
                 <tr class="login-cl">
                     <td><input type="checkbox" id="ckbRecUs" /><label for="ckbRecUs" id="lbRecUs">Recordar</label></td>

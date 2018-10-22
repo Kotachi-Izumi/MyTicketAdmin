@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AsigRol</title>
+</head>
+<body>
+    <div>
+        @RenderPage("Header.cshtml")
+    </div>
+    <div class="central">
+        <div>
+            <table>
+                <caption>Configuracion de roles de usuario</caption>
+                <tr>
+                    <th><label for="inRolCodPersona">Ingresar codigo persona</label></th>
+                    <td><input type="text" id="inRolCodPersona"/></td>
+                    <th><label for="inIngUsua">Ingrese usuario</label></th>
+                    <td><input  type="text" id="inIngUsua"/></td>
+                    <th><label for="inIngPass">Ingrese password</label></th>
+                    <td><input type="password" id="inIngPass"/></td>
+                    <th><label for="inConfPass">Confirme password</label></th>
+                    <td><input type="password" id="inConfPass" /></td>
+                </tr>
+                <tr>
+                    <th><label for="selArea">Ingrese area</label></th>
+                    <td><select id="selArea">
+                        <option>Seleccione</option>
+                        <option>Servicios tecnicos</option>
+                        </select>
+                    </td>
+                    <th><label for="selEstado">Ingrese estado usuario</label></th>
+                    <td><select id="selEstado">
+                        <option>Seleccione</option>
+                        <option>Activo</option>
+                        <option>Desactivado</option>
+                        </select></td>
+                    <th><label for="inFecVenc">Fecha vencimiento</label></th>
+                    <td><input type="date" id="inFecVenc"/></td>
+                </tr>
+            </table>
+        </div> 
+
+    </div>
+    <p>@Html.ActionLink("Regresar", "Index", "Home")</p>
+</body>
+</html>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MyTicketAdmin.Controllers
 {
@@ -15,11 +16,23 @@ namespace MyTicketAdmin.Controllers
         }
         public ActionResult btnEnviar()
         {
-            ConPG con = new ConPG();
-            con.abrirConexion();
-            con.agregar();
-            con.cerrarConexion();
-            return null;       
+            var user = Request.Form["inUsuario"].ToString();
+            var pass = Request.Form["inpPass"].ToString();
+            var con = new ConPG();
+            if (con.autenticar(user, pass))
+            {
+                //FormsAuthentication.RedirectFromLoginPage(user, false)
+                return View("Principal.cshtml");
+            }
+            else
+            {
+                return null;
+            }       
+        }
+
+        public ActionResult linkRegistro()
+        {
+            return View("Registro.cshtml");
         }
     }
 }

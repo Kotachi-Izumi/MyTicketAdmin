@@ -1,0 +1,41 @@
+﻿body {
+    background-color: lavender;  
+}
+
+#dCabecera {
+    max-width:720px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.central{
+    max-width:720px;
+    margin-left: auto;
+    margin-right: auto;            
+}
+
+th {
+    text-align: left;
+}
+
+caption {
+    text-decoration: underline;
+    font-family: 'Lucida Sans', 'Lucidfont-family:"Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;a Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    text-decoration-style: solid;
+}
+
+#dDatosPersona {    
+    padding-left:10%;
+    margin-left: 0 auto;
+    margin-right: 0 auto;
+    
+}
+#dDatosDomicilio{
+    padding:5%;
+}
+
+/*Codigo para el popup
+    <a href="http://www.forosdelweb.com/f4/como-abrir-ventana-nueva-pequena-pinchar-enlace-1035579/#post4362645" target="_blank" onclick="window.open(this.href, this.target, 'width=300,height=400'); return false;">Link popup</a>
+*/

@@ -126,6 +126,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Estilos\cssRegistro.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\banner.PNG" />
     <Content Include="Images\banner2.PNG" />
@@ -133,11 +134,15 @@
     <Content Include="Images\banner4.PNG" />
     <Content Include="Images\logo ticket.jpg" />
     <Content Include="Estilos\Style1.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PrincipalController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -148,6 +153,10 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Principal\Principal.cshtml" />
+    <Content Include="Views\Register\Registro.cshtml" />
+    <Content Include="Views\Register\AsigRol.cshtml" />
+    <Content Include="Views\Register\Header.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
