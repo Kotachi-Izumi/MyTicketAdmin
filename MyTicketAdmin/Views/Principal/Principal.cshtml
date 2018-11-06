@@ -9,9 +9,29 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Principal</title>
+    <link rel="stylesheet" href="~/Estilos/cssRegistro.css" />
 </head>
 <body>
-    <div> 
+    @RenderPage("~\\Views\\Register\\Header.cshtml")
+    @{ var link = "~\\Views\\Register\\AsigRol.cshtml";}
+    <div id="pos">
+        <h1>Panel de control</h1>
+    </div>
+    <div id="cuerpoCentral" class="central">
+        <div id="menuLat">
+            <h1><Strong>Menu</Strong></h1>
+            <ul>
+                <li>@Html.ActionLink("Registrar usuario","Registro","Register")</li>
+                <li>Eliminacion usuario</li>
+                <li>Modificacion usuario</li>
+                <li><a href="../Register/AsigRol" target="#cuerpoInfo">Asignacion de rol</a></li>
+                <li>Reporte de actividad</li>
+                <li>Salir</li>
+            </ul>
+        </div> 
+        <div id="cuerpoInfo" name="cuerpoInfo">
+            informacion
+        </div>
     </div>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="cssRegistro.css" />
     <title>AsigRol</title>
 </head>
 <body>
@@ -19,33 +20,46 @@
             <table>
                 <caption>Configuracion de roles de usuario</caption>
                 <tr>
-                    <th><label for="inRolCodPersona">Ingresar codigo persona</label></th>
-                    <td><input type="text" id="inRolCodPersona"/></td>
-                    <th><label for="inIngUsua">Ingrese usuario</label></th>
-                    <td><input  type="text" id="inIngUsua"/></td>
-                    <th><label for="inIngPass">Ingrese password</label></th>
-                    <td><input type="password" id="inIngPass"/></td>
-                    <th><label for="inConfPass">Confirme password</label></th>
-                    <td><input type="password" id="inConfPass" /></td>
+                    <td>
+                        <label for="inRolCodPersona"><strong>Ingresar codigo persona</strong></label>
+                        <input type="text" id="inRolCodPersona" />
+                    </td>
+                    <td>
+                        <label for="inIngUsua"><strong>Ingrese usuario</strong></label>
+                        <input type="text" id="inIngUsua" />
+                    </td>
+                    <td>
+                        <label for="inIngPass"><strong>Ingrese password</strong></label>
+                        <input type="password" id="inIngPass" />
+                    </td>
+                    <td>
+                        <label for="inConfPass"><strong>Confirme password</strong></label>
+                        <input type="password" id="inConfPass" />
+                    </td>
                 </tr>
                 <tr>
-                    <th><label for="selArea">Ingrese area</label></th>
-                    <td><select id="selArea">
-                        <option>Seleccione</option>
-                        <option>Servicios tecnicos</option>
+                    <td>
+                        <label for="selArea"><strong>Ingrese area</strong></label>
+                        <select id="selArea">
+                            <option>Seleccione</option>
+                            <option>Servicios tecnicos</option>
                         </select>
                     </td>
-                    <th><label for="selEstado">Ingrese estado usuario</label></th>
-                    <td><select id="selEstado">
-                        <option>Seleccione</option>
-                        <option>Activo</option>
-                        <option>Desactivado</option>
-                        </select></td>
-                    <th><label for="inFecVenc">Fecha vencimiento</label></th>
-                    <td><input type="date" id="inFecVenc"/></td>
+                    <td>
+                        <label for="selEstado"><strong>Ingrese estado usuario</strong></label>
+                        <select id="selEstado">
+                            <option>Seleccione</option>
+                            <option>Activo</option>
+                            <option>Desactivado</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label for="inFecVenc"><strong>Fecha vencimiento</strong></label>
+                        <input type="date" id="inFecVenc" />
+                    </td>
                 </tr>
             </table>
-        </div> 
+        </div>
 
     </div>
     <p>@Html.ActionLink("Regresar", "Index", "Home")</p>

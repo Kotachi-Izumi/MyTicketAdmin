@@ -11,12 +11,12 @@ namespace MyTicketAdmin.Controllers
         // GET: Register
         public ActionResult Registro()
         {
-            return View();
+            return View("~\\Views\\Register\\Registro.cshtml");
         }
 
         public ActionResult AsigRol()
         {
-            return View();
+            return View("~\\Views\\Register\\AsigRol.cshtml");
         }
     }
 }

@@ -126,6 +126,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BDMyTicket.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BDMyTicket.edmx</DependentUpon>
+      <LastGenOutput>BDMyTicket.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="BDMyTicket.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BDMyTicket.edmx</DependentUpon>
+      <LastGenOutput>BDMyTicket.cs</LastGenOutput>
+    </Content>
     <Content Include="Estilos\cssRegistro.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\banner.PNG" />
@@ -140,6 +150,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BDMyTicket.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDMyTicket.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BDMyTicket.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDMyTicket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BDMyTicket.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDMyTicket.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PrincipalController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -147,7 +172,34 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ConPG.cs" />
+    <Compile Include="mt_tab_comuna.cs">
+      <DependentUpon>BDMyTicket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mt_tab_direccion.cs">
+      <DependentUpon>BDMyTicket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mt_tab_persona.cs">
+      <DependentUpon>BDMyTicket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mt_tab_region.cs">
+      <DependentUpon>BDMyTicket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mt_tab_rol.cs">
+      <DependentUpon>BDMyTicket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mt_tab_rolusua.cs">
+      <DependentUpon>BDMyTicket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mt_tab_ticket.cs">
+      <DependentUpon>BDMyTicket.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mt_tab_usuario.cs">
+      <DependentUpon>BDMyTicket.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="prueba.cs">
+      <DependentUpon>BDMyTicket.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -157,6 +209,13 @@
     <Content Include="Views\Register\Registro.cshtml" />
     <Content Include="Views\Register\AsigRol.cshtml" />
     <Content Include="Views\Register\Header.cshtml" />
+    <EntityDeploy Include="BDMyTicket.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BDMyTicket.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="BDMyTicket.edmx.diagram">
+      <DependentUpon>BDMyTicket.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -169,6 +228,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

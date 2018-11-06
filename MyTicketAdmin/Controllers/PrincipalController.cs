@@ -10,16 +10,16 @@ namespace MyTicketAdmin.Controllers
     public class PrincipalController : Controller
     {
         // GET: Principal
-        public ActionResult Index()
+        public ActionResult Principal()
         {
             return View();
         }
 
-        public ActionResult logueo()
+        /*public ActionResult logueo()
         {
             var conex = new ConPG();
             conex.abrirConexion();            
             return null;
-        }
+        }*/
     }
 }

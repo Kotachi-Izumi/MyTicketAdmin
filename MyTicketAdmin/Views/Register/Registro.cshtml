@@ -1,91 +1,111 @@
 ﻿
 @{
-	Layout = null;
+    Layout = null;
 }
 
-<!DOCTYPE html public >
+<!DOCTYPE html public>
 <html lang="es-cl">
 <head>
-	<meta name="viewport" content="width=device-width" />
-	<meta http-equiv="content-type" content="text/html" charset="utf-8" />
-	<link rel="stylesheet" href="~/Estilos/cssRegistro.css"/>
-	<title>Registro</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="content-type" content="text/html" charset="utf-8" />
+    <link rel="stylesheet" href="~/Estilos/cssRegistro.css" />
+    <title>Registro</title>
 </head>
 <body>
-	<header>
-		<div id="dCabecera">
-			<img id="imgCabecera" alt="logo" src="/Images/banner4.PNG" width="860" height="171">
-		</div>
-	</header>
-	<div class="central">
-		<div id="dDatosPersona">
-			<table border="0" class="registro" id="tblDatosPersonales">
-				<caption><strong>Datos personales</strong></caption>
-				<tr>
-					<th><label for="inRut" class="lbTblPersona">Ingresar rut </label></th>
-					<td><input type="text" id="inRut" maxlength="8" /></td>
-					<th><label for="inDV" class="lbTblPersona">Ingresar digito verificador </label></th>
-					<td> <input type="text" id="inDV" maxlength="1" /></td>
-					<th><label for="inFNac" class="lbTblPersona">Ingresar fecha de nacimiento </label></th>
-					<td><input type="date" id="inFNac" /></td>
-				</tr>
-				<tr>
-					<th><label for="inPNombre" class="lbTblPersona">Ingresar primer nombre </label></th>
-					<td><input type="text" id="inPNombre" /></td>
-					<th><label for="inSNombre" class="lbTblPersona">Ingresar segundo nombre </label></th>
-					<td> <input type="text" id="inSNombre" /></td>
-					<th><label for="inApPat" class="lbTblPersona">Ingrese primer apellido </label></th>
-					<td> <input type="text" id="inApPat" /></td>
-				</tr>
-				<tr>
-					<th><label for="inApMat" class="lbTblPersona">Ingrese segundo apellido</label></th>
-					<td> <input type="text" id="inApMat" /></td>
-					<th><label for="inTelFijo" class="lbTblPersona">Ingrese telefono fijo </label></th>
-					<td> <input type="tel" id="inTelFijo" /></td>
-					<th><label for="inTelCel" class="lbTblPersona">Ingrese telefono celular </label></th>
-					<td> <input type="tel" id="inTelCel" /></td>
-				</tr>
-				<tr>
-					<th><label for="inEmail" class="lbTblPersona">Ingrese mail </label> </th>
-					<td><input type="email" id="inEmail" /></td>
-				</tr>
-			</table>
-		</div>
-		<div id="dDatosDomicilio">
-			<table class="registro" id="tblDatosDomicilio">
-				<caption><strong>Region</strong> </caption>
-				<tr>
-					<th><label for="selRegion" class="lbTblPersona"> Region</label></th>
-					<th><label for="inCiudad" class="lbTblPersona">Ciudad</label></th>
-					<th><label for="inComuna" class="lbTblPersona">Comuna</label></th>
-					<th><label for="inDireccion" class="lbTblPersona">Direccion</label></th>
-					<th><label for="inNumCasa" class="lbTblPersona"> Numero de casa</label></th>
-				</tr>
-				<tr>
-					<td>
-						<select id="selRegion">
-							<option>Seleccione</option>
-							<option>Metropolitana</option>
-							<option>Araucania</option>
-							<option>Bio Bio</option>
-						</select>
-					</td>
-					<td>
-						<input type="text" id="inCiudad" />
-					</td>
-					<td>
-						<input type="text" id="inComuna" />
-					</td>
-					<td>
-						<input type="text" id="inDireccion" />
-					</td>
-					<td>
-						<input type="text" id="inNumCasa" />
-					</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	<p>@Html.ActionLink("Regresar","Index","Home")</p>
+    <header>
+        <div id="dCabecera">
+            <img id="imgCabecera" alt="logo" src="/Images/banner4.PNG" width="860" height="171">
+        </div>
+    </header>
+    <div class="central">
+        <div id="dDatosPersona">
+            <table class="registro" id="tblDatosPersonales">
+                <caption><strong>Datos personales</strong></caption>
+                <tr>
+                    <td>
+                        <label for="inRut" class="lbTblPersona"><strong>Ingresar rut</strong> </label>
+                        <input type="text" id="inRut" maxlength="8" />
+                    </td>
+                    <td>
+                        <label for="inDV" class="lbTblPersona"><strong>Ingresar digito verificador</strong> </label>
+                        <input type="text" id="inDV" maxlength="1" />
+                    </td>
+                    <td>
+                        <label for="inFNac" class="lbTblPersona"><strong>Ingresar fecha de nacimiento</strong> </label>
+                        <input type="date" id="inFNac" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="inPNombre" class="lbTblPersona"><strong>Ingresar primer nombre</strong> </label>
+                        <input type="text" id="inPNombre" />
+                    </td>
+                    <td>
+                        <label for="inSNombre" class="lbTblPersona"><strong>Ingresar segundo nombre</strong> </label>
+                        <input type="text" id="inSNombre" />
+                    </td>
+                    <td>
+                        <label for="inApPat" class="lbTblPersona"><strong>Ingrese primer apellido</strong> </label>
+                        <input type="text" id="inApPat" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="inApMat" class="lbTblPersona"><strong>Ingrese segundo apellido</strong></label>
+                        <input type="text" id="inApMat" />
+                    </td>
+                    <td>
+                        <label for="inTelFijo" class="lbTblPersona"><strong>Ingrese telefono fijo</strong> </label>
+                        <input type="tel" id="inTelFijo" />
+                    </td>
+                    <td>
+                        <label for="inTelCel" class="lbTblPersona"><strong>Ingrese telefono celular</strong> </label>
+                        <input type="tel" id="inTelCel" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="inEmail" class="lbTblPersona"><strong>Ingrese mail </strong></label>
+                        <input type="email" id="inEmail" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="dDatosDomicilio">
+            <table class="registro" id="tblDatosDomicilio">
+                <caption><strong>Region</strong> </caption>
+                <tr>
+                    <th><label for="selRegion" class="lbTblPersona"> Region</label></th>
+                    <th><label for="inCiudad" class="lbTblPersona">Ciudad</label></th>
+                    <th><label for="inComuna" class="lbTblPersona">Comuna</label></th>
+                    <th><label for="inDireccion" class="lbTblPersona">Direccion</label></th>
+                    <th><label for="inNumCasa" class="lbTblPersona"> Numero de casa</label></th>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="selRegion">
+                            <option>Seleccione</option>
+                            <option>Metropolitana</option>
+                            <option>Araucania</option>
+                            <option>Bio Bio</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" id="inCiudad" />
+                    </td>
+                    <td>
+                        <input type="text" id="inComuna" />
+                    </td>
+                    <td>
+                        <input type="text" id="inDireccion" />
+                    </td>
+                    <td>
+                        <input type="text" id="inNumCasa" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <p>@Html.ActionLink("Regresar", "Index", "Home")</p>
 </body>
 </html>

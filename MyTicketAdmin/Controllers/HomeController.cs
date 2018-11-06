@@ -19,14 +19,15 @@ namespace MyTicketAdmin.Controllers
             var user = Request.Form["inUsuario"].ToString();
             var pass = Request.Form["inpPass"].ToString();
             var con = new ConPG();
-            if (con.autenticar(user, pass))
+            if (con.autenticar(user,pass))
             {
                 //FormsAuthentication.RedirectFromLoginPage(user, false)
-                return View("Principal.cshtml");
+                return View("~\\Views\\Principal\\Principal.cshtml");
+                
             }
             else
             {
-                return null;
+                return View("~\\Views\\Home\\Index.cshtml");
             }       
         }
 
