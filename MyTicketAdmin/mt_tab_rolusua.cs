@@ -19,5 +19,8 @@ namespace MyTicketAdmin
         public Nullable<long> usuario_cod_usuario { get; set; }
         public Nullable<System.DateTime> rolusua_fec_ini { get; set; }
         public Nullable<System.DateTime> rolusua_fec_fin { get; set; }
+    
+        public virtual mt_tab_rol mt_tab_rol { get; set; }
+        public virtual mt_tab_usuario mt_tab_usuario { get; set; }
     }
 }

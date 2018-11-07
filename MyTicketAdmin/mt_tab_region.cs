@@ -14,9 +14,16 @@ namespace MyTicketAdmin
     
     public partial class mt_tab_region
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public mt_tab_region()
+        {
+            this.mt_tab_comuna = new HashSet<mt_tab_comuna>();
+        }
+    
         public long region_cod_region { get; set; }
         public string region_dsc_region { get; set; }
-        public Nullable<System.DateTime> region_fec_ini { get; set; }
-        public Nullable<System.DateTime> region_fec_fin { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<mt_tab_comuna> mt_tab_comuna { get; set; }
     }
 }

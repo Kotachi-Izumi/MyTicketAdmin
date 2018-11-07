@@ -25,6 +25,7 @@ namespace MyTicketAdmin
         public Nullable<decimal> direccion_num_direccion { get; set; }
         public Nullable<long> comuna_cod_comuna { get; set; }
     
+        public virtual mt_tab_comuna mt_tab_comuna { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<mt_tab_persona> mt_tab_persona { get; set; }
     }

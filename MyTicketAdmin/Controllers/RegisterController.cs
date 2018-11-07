@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyTicketAdmin.Models.DatosObj;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,17 @@ namespace MyTicketAdmin.Controllers
         public ActionResult AsigRol()
         {
             return View("~\\Views\\Register\\AsigRol.cshtml");
+        }
+
+        public ActionResult PruebaIngreso()
+        {
+            var pg = new ConPG();
+
+            var per = new MPersona();
+            var dir = new MDireccion();
+                pg.ingresarPersona(per, dir);
+            
+            return null;
         }
     }
 }

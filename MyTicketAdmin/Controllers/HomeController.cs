@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyTicketAdmin.Models.DatosObj;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,10 +17,15 @@ namespace MyTicketAdmin.Controllers
         }
         public ActionResult btnEnviar()
         {
+            var per = new MPersona();
+            var dir = new MDireccion();
+            
+
             var user = Request.Form["inUsuario"].ToString();
             var pass = Request.Form["inpPass"].ToString();
             var con = new ConPG();
-            if (con.autenticar(user,pass))
+            con.ingresarPersona(per, dir);
+            if (ConPG.autenticar(user, pass))
             {
                 //FormsAuthentication.RedirectFromLoginPage(user, false)
                 return View("~\\Views\\Principal\\Principal.cshtml");

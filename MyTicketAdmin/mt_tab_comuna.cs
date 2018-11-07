@@ -14,9 +14,19 @@ namespace MyTicketAdmin
     
     public partial class mt_tab_comuna
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public mt_tab_comuna()
+        {
+            this.mt_tab_direccion = new HashSet<mt_tab_direccion>();
+        }
+    
         public long comuna_cod_comuna { get; set; }
         public string comuna_nom_comuna { get; set; }
         public string comuna_ciudad_comuna { get; set; }
         public long comuna_cod_region { get; set; }
+    
+        public virtual mt_tab_region mt_tab_region { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<mt_tab_direccion> mt_tab_direccion { get; set; }
     }
 }

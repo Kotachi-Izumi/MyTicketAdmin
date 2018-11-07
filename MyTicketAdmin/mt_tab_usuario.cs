@@ -14,6 +14,12 @@ namespace MyTicketAdmin
     
     public partial class mt_tab_usuario
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public mt_tab_usuario()
+        {
+            this.mt_tab_rolusua = new HashSet<mt_tab_rolusua>();
+        }
+    
         public long usuario_cod_usuario { get; set; }
         public Nullable<long> usuario_cod_estado { get; set; }
         public string usuario_cod_password { get; set; }
@@ -22,5 +28,7 @@ namespace MyTicketAdmin
         public string usuario_nick_usuario { get; set; }
     
         public virtual mt_tab_persona mt_tab_persona { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<mt_tab_rolusua> mt_tab_rolusua { get; set; }
     }
 }

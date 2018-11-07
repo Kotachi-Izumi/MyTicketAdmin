@@ -172,6 +172,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ConPG.cs" />
+    <Compile Include="Models\DatosObj\MDireccion.cs" />
+    <Compile Include="Models\DatosObj\MPersona.cs" />
     <Compile Include="mt_tab_comuna.cs">
       <DependentUpon>BDMyTicket.tt</DependentUpon>
     </Compile>

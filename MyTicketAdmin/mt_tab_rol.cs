@@ -14,7 +14,16 @@ namespace MyTicketAdmin
     
     public partial class mt_tab_rol
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public mt_tab_rol()
+        {
+            this.mt_tab_rolusua = new HashSet<mt_tab_rolusua>();
+        }
+    
         public long rol_cod_rol { get; set; }
         public string rol_dsc_rol { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<mt_tab_rolusua> mt_tab_rolusua { get; set; }
     }
 }

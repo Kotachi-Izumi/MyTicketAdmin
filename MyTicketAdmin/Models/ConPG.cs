@@ -3,8 +3,7 @@ using System.Data;
 using Npgsql;
 using NpgsqlTypes;
 using System.Linq;
-    
-
+using MyTicketAdmin.Models.DatosObj;
 
 namespace MyTicketAdmin.Controllers
 {
@@ -38,20 +37,18 @@ namespace MyTicketAdmin.Controllers
 
         public Boolean agregar(int cod)
         {
-            
+
             var log = false;
             con.Open();
-            
+
             comandos = new NpgsqlCommand
             {
                 Connection = con,
-                //CommandText = "INSERT INTO mt_tab_region VALUES (@cod,'BIO BIO','15/07/2017','18/10/2018')",
-                CommandText = "SELECT * FROM mt_tab_comuna",
-                //comandos.CommandText = "SELECT * FROM prueba";
+                CommandText = "INSERT INTO mt_tab_region VALUES (@cod,'BIO BIO','15/07/2017','18/10/2018')",
                 CommandType = System.Data.CommandType.Text
-                
+
             };
-            //comandos.Parameters.AddWithValue("cod", cod);
+            comandos.Parameters.AddWithValue("@cod", cod);
             var resultOk = comandos.ExecuteNonQuery();
             if(resultOk > 0)
             {
@@ -61,10 +58,10 @@ namespace MyTicketAdmin.Controllers
             return log;
         }
 
-        public Boolean autenticar(String user, String pass)
+        public static bool autenticar(string user, string pass)
         {
             var log = false;
-            
+
             using (myticketEntities myTicket = new myticketEntities())
             {
                  var lst = (from d in myTicket.mt_tab_usuario
@@ -75,11 +72,58 @@ namespace MyTicketAdmin.Controllers
                     log = true;
                 }
                     }
-            
+
             return log;
         }
 
-        public Boolean autenticar5(String user, String pass)
+        public void ingresarPersona(MPersona per, MDireccion dir)
+        {
+            per.AppMaterno = "Ocampo";
+            per.AppPaterno = "Palacios";
+            per.CodPersona = 2;
+            per.DV = "5";
+            per.Fnac = Convert.ToDateTime("1986-11-21");
+            per.Fono = "222222222";
+            per.Mail = "julian.palacios@email.com";
+            per.nombre = "Julian Andres";
+            per.Rut = 24089142;
+            per.CodDireccion = 2;
+            per.Celular = "953439463";
+
+            dir.CodDireccion = 2;
+            dir.CodComuna = 1;
+            dir.DescCasa = "Lord Cochrane";
+            dir.NumCasa = 184;
+            using (myticketEntities myticket = new myticketEntities())
+            {
+                var mtDir = new mt_tab_direccion();
+                var mtPer = new mt_tab_persona();
+                mtDir.comuna_cod_comuna = dir.CodComuna;
+                mtDir.direccion_cod_direccion = dir.CodDireccion;
+                mtDir.direccion_dsc_direccion = dir.DescCasa;
+                mtDir.direccion_num_direccion = dir.NumCasa;
+
+                mtPer.persona_cod_persona = per.CodPersona;
+                mtPer.persona_dsc_apmaterno = per.AppMaterno;
+                mtPer.persona_dsc_appaterno = per.AppPaterno;
+                mtPer.persona_dsc_nombre = per.nombre;
+                mtPer.persona_fec_nacimiento = per.Fnac;
+                mtPer.persona_num_celular = per.Celular;
+                mtPer.persona_num_fono = per.Fono;
+                mtPer.persona_num_rut = per.Rut;
+                mtPer.persona_num_dv = per.DV;
+                mtPer.direccion_cod_direccion = per.CodDireccion;
+
+                myticket.mt_tab_direccion.Add(mtDir);
+                myticket.mt_tab_persona.Add(mtPer);
+                myticket.SaveChanges();
+
+            }
+
+
+        }
+
+        public Boolean autenticar5()
         {
             var log = false;
             var query = "SELECT * FROM mt_tab_usuario";
@@ -90,8 +134,8 @@ namespace MyTicketAdmin.Controllers
                 {
 
                     com.CommandType = CommandType.Text;
-                    
-                    
+
+
                     var resultOk = com.ExecuteNonQuery();
                     if(resultOk > 0)
                     {
@@ -149,19 +193,19 @@ namespace MyTicketAdmin.Controllers
         public Boolean autenticar3(String user, String pass)
         {
             var log = false;
-            
+
             try
             {
 
                 using (NpgsqlConnection conex = new NpgsqlConnection(urlCon))
                 {
                     conex.Open();
-                    
+
                     using(NpgsqlCommand com = new NpgsqlCommand("SELECT * FROM mt_tab_usuario WHERE (usuario_nick_usuario = @user AND usuario_cod_password = @pass);", conex))
                     {
-                        
+
                         com.AllResultTypesAreUnknown = true;
-                        
+
                         com.Parameters.Add(new NpgsqlParameter
                         {
                             DbType = DbType.String,
@@ -172,7 +216,7 @@ namespace MyTicketAdmin.Controllers
                             Value = user
                         } //"@user", NpgsqlDbType.Varchar
                             );
-                        
+
                         com.Parameters.Add(new NpgsqlParameter {
                             DbType = DbType.String,
                             ParameterName = "@pass",
@@ -181,8 +225,8 @@ namespace MyTicketAdmin.Controllers
                             NpgsqlDbType = NpgsqlDbType.Varchar,
                             Value = pass
                         }); //("@pass", NpgsqlDbType.Varchar)
-                        
-                        
+
+
                         var resultOk = com.ExecuteNonQuery();
                         if(resultOk > 0)
                         {
@@ -203,7 +247,7 @@ namespace MyTicketAdmin.Controllers
         public Boolean autenticar2(String user, String pass)
         {
             var log = false;
-           
+
             try
             {
                 abrirConexion();
@@ -212,7 +256,7 @@ namespace MyTicketAdmin.Controllers
                     Connection = con,
                     CommandText = "SELECT * FROM mt_tab_usuario WHERE (usuario_nick_usuario = @user AND usuario_cod_password = @pass);",
                     CommandType = CommandType.Text
-                    
+
                 };
 
                 comandos.Parameters.Clear();
@@ -243,7 +287,7 @@ namespace MyTicketAdmin.Controllers
             var log = false;
             try
             {
-                
+
             //cREAR NPGSQL PARAMETER
             var user1 = new NpgsqlParameter();
             var pass1 = new NpgsqlParameter();
@@ -263,14 +307,14 @@ namespace MyTicketAdmin.Controllers
             };
                 user1.ParameterName = "@user";
                 pass1.ParameterName = "@pass";
-                
+
                 comandos.Parameters.Add(user1);
                 comandos.Parameters.Add(pass1);
                 comandos.Parameters[0].DataTypeName = "character varying";
                 comandos.Parameters[1].DataTypeName = "character varying";
-                
+
                 //comandos.Prepare();
-                
+
                 comandos.Parameters[0].Value = user;
                 comandos.Parameters[1].Value = pass;
 
@@ -299,7 +343,7 @@ namespace MyTicketAdmin.Controllers
             finally
             {
                 cerrarConexion();
-                
+
             }
             return log;
 
