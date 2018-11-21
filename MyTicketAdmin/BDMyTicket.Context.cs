@@ -25,14 +25,15 @@ namespace MyTicketAdmin
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<mt_tab_ticket> mt_tab_ticket { get; set; }
-        public virtual DbSet<prueba> prueba { get; set; }
+        public virtual DbSet<mt_tab_areas> mt_tab_areas { get; set; }
         public virtual DbSet<mt_tab_comuna> mt_tab_comuna { get; set; }
         public virtual DbSet<mt_tab_direccion> mt_tab_direccion { get; set; }
         public virtual DbSet<mt_tab_persona> mt_tab_persona { get; set; }
         public virtual DbSet<mt_tab_region> mt_tab_region { get; set; }
         public virtual DbSet<mt_tab_rol> mt_tab_rol { get; set; }
         public virtual DbSet<mt_tab_rolusua> mt_tab_rolusua { get; set; }
+        public virtual DbSet<mt_tab_ticket> mt_tab_ticket { get; set; }
         public virtual DbSet<mt_tab_usuario> mt_tab_usuario { get; set; }
+        public virtual DbSet<prueba> prueba { get; set; }
     }
 }

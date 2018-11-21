@@ -172,8 +172,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ConPG.cs" />
+    <Compile Include="Models\DatosObj\EnvioMail.cs" />
     <Compile Include="Models\DatosObj\MDireccion.cs" />
     <Compile Include="Models\DatosObj\MPersona.cs" />
+    <Compile Include="Models\DatosObj\MTicket.cs" />
+    <Compile Include="mt_tab_areas.cs">
+      <DependentUpon>BDMyTicket.tt</DependentUpon>
+    </Compile>
     <Compile Include="mt_tab_comuna.cs">
       <DependentUpon>BDMyTicket.tt</DependentUpon>
     </Compile>
@@ -210,7 +215,7 @@
     <Content Include="Views\Principal\Principal.cshtml" />
     <Content Include="Views\Register\Registro.cshtml" />
     <Content Include="Views\Register\AsigRol.cshtml" />
-    <Content Include="Views\Register\Header.cshtml" />
+    <Content Include="Views\Register\_Header.cshtml" />
     <EntityDeploy Include="BDMyTicket.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BDMyTicket.Designer.cs</LastGenOutput>

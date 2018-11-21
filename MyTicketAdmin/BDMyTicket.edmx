@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="myticketModel.Store" Provider="Npgsql" ProviderManifestToken="10.4" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="mt_tab_areas">
+          <Key>
+            <PropertyRef Name="area_cod_area" />
+          </Key>
+          <Property Name="area_cod_area" Type="int8" Nullable="false" />
+          <Property Name="area_nombre_area" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="mt_tab_comuna">
           <Key>
             <PropertyRef Name="comuna_cod_comuna" />
@@ -13,6 +20,8 @@
           <Property Name="comuna_nom_comuna" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="comuna_ciudad_comuna" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="comuna_cod_region" Type="int8" Nullable="false" />
+          <Property Name="comuna_fecha_vigencia" Type="time" Precision="6" />
+          <Property Name="comuna_fin_vigencia" Type="time" Precision="6" />
         </EntityType>
         <EntityType Name="mt_tab_direccion">
           <Key>
@@ -45,6 +54,8 @@
           </Key>
           <Property Name="region_cod_region" Type="int8" Nullable="false" />
           <Property Name="region_dsc_region" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="region_fecha_vigencia" Type="time" Precision="6" />
+          <Property Name="region_fin_vigencia" Type="time" Precision="6" />
         </EntityType>
         <EntityType Name="mt_tab_rol">
           <Key>
@@ -88,9 +99,10 @@
           <Property Name="usuario_cod_usuario" Type="int8" Nullable="false" />
           <Property Name="usuario_cod_estado" Type="int8" />
           <Property Name="usuario_cod_password" Type="varchar" MaxLength="50" />
-          <Property Name="usuario_dsc_area" Type="varchar" MaxLength="255" />
-          <Property Name="persona_cod_persona" Type="int8" />
+          <Property Name="usuario_cod_persona" Type="int8" />
           <Property Name="usuario_nick_usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="usuario_cod_area" Type="int8" />
+          <Property Name="usuario_token_usuario" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="prueba">
           <Key>
@@ -99,7 +111,19 @@
           <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="apellidos" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <Association Name="fk_Comuna">
+        <Association Name="fk_areas">
+          <End Role="mt_tab_areas" Type="Self.mt_tab_areas" Multiplicity="0..1" />
+          <End Role="mt_tab_usuario" Type="Self.mt_tab_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mt_tab_areas">
+              <PropertyRef Name="area_cod_area" />
+            </Principal>
+            <Dependent Role="mt_tab_usuario">
+              <PropertyRef Name="usuario_cod_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_com_region">
           <End Role="mt_tab_region" Type="Self.mt_tab_region" Multiplicity="1" />
           <End Role="mt_tab_comuna" Type="Self.mt_tab_comuna" Multiplicity="*" />
           <ReferentialConstraint>
@@ -108,6 +132,18 @@
             </Principal>
             <Dependent Role="mt_tab_comuna">
               <PropertyRef Name="comuna_cod_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_dir_com">
+          <End Role="mt_tab_comuna" Type="Self.mt_tab_comuna" Multiplicity="0..1" />
+          <End Role="mt_tab_direccion" Type="Self.mt_tab_direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mt_tab_comuna">
+              <PropertyRef Name="comuna_cod_comuna" />
+            </Principal>
+            <Dependent Role="mt_tab_direccion">
+              <PropertyRef Name="comuna_cod_comuna" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -123,18 +159,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_direccion1">
-          <End Role="mt_tab_comuna" Type="Self.mt_tab_comuna" Multiplicity="0..1" />
-          <End Role="mt_tab_direccion" Type="Self.mt_tab_direccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="mt_tab_comuna">
-              <PropertyRef Name="comuna_cod_comuna" />
-            </Principal>
-            <Dependent Role="mt_tab_direccion">
-              <PropertyRef Name="comuna_cod_comuna" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_persona">
           <End Role="mt_tab_persona" Type="Self.mt_tab_persona" Multiplicity="0..1" />
           <End Role="mt_tab_usuario" Type="Self.mt_tab_usuario" Multiplicity="*" />
@@ -143,7 +167,7 @@
               <PropertyRef Name="persona_cod_persona" />
             </Principal>
             <Dependent Role="mt_tab_usuario">
-              <PropertyRef Name="persona_cod_persona" />
+              <PropertyRef Name="usuario_cod_persona" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -172,6 +196,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="myticketModelStoreContainer">
+          <EntitySet Name="mt_tab_areas" EntityType="Self.mt_tab_areas" Schema="myticket" store:Type="Tables" />
           <EntitySet Name="mt_tab_comuna" EntityType="Self.mt_tab_comuna" Schema="myticket" store:Type="Tables" />
           <EntitySet Name="mt_tab_direccion" EntityType="Self.mt_tab_direccion" Schema="myticket" store:Type="Tables" />
           <EntitySet Name="mt_tab_persona" EntityType="Self.mt_tab_persona" Schema="myticket" store:Type="Tables" />
@@ -181,17 +206,21 @@
           <EntitySet Name="mt_tab_ticket" EntityType="Self.mt_tab_ticket" Schema="myticket" store:Type="Tables" />
           <EntitySet Name="mt_tab_usuario" EntityType="Self.mt_tab_usuario" Schema="myticket" store:Type="Tables" />
           <EntitySet Name="prueba" EntityType="Self.prueba" Schema="myticket" store:Type="Tables" />
-          <AssociationSet Name="fk_Comuna" Association="Self.fk_Comuna">
+          <AssociationSet Name="fk_areas" Association="Self.fk_areas">
+            <End Role="mt_tab_areas" EntitySet="mt_tab_areas" />
+            <End Role="mt_tab_usuario" EntitySet="mt_tab_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_com_region" Association="Self.fk_com_region">
             <End Role="mt_tab_region" EntitySet="mt_tab_region" />
             <End Role="mt_tab_comuna" EntitySet="mt_tab_comuna" />
+          </AssociationSet>
+          <AssociationSet Name="fk_dir_com" Association="Self.fk_dir_com">
+            <End Role="mt_tab_comuna" EntitySet="mt_tab_comuna" />
+            <End Role="mt_tab_direccion" EntitySet="mt_tab_direccion" />
           </AssociationSet>
           <AssociationSet Name="fk_direccion" Association="Self.fk_direccion">
             <End Role="mt_tab_direccion" EntitySet="mt_tab_direccion" />
             <End Role="mt_tab_persona" EntitySet="mt_tab_persona" />
-          </AssociationSet>
-          <AssociationSet Name="fk_direccion1" Association="Self.fk_direccion1">
-            <End Role="mt_tab_comuna" EntitySet="mt_tab_comuna" />
-            <End Role="mt_tab_direccion" EntitySet="mt_tab_direccion" />
           </AssociationSet>
           <AssociationSet Name="fk_persona" Association="Self.fk_persona">
             <End Role="mt_tab_persona" EntitySet="mt_tab_persona" />
@@ -210,46 +239,26 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="myticketModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="mt_tab_ticket">
-          <Key>
-            <PropertyRef Name="ticket_cod_ticket" />
-          </Key>
-          <Property Name="ticket_cod_ticket" Type="Int64" Nullable="false" />
-          <Property Name="ticket_fec_creacion" Type="DateTime" Precision="6" />
-          <Property Name="ticket_fec_respuesta" Type="DateTime" Precision="6" />
-          <Property Name="ticket_cod_usuaingreso" Type="Int64" />
-          <Property Name="ticket_cod_usuaresponde" Type="Int64" />
-          <Property Name="ticket_dsc_detalle" Type="String" MaxLength="5000" FixedLength="false" Unicode="true" />
-          <Property Name="ticket_es_masivo" Type="Boolean" />
-          <Property Name="ticket_cod_tipoatencion" Type="Int64" />
-          <Property Name="ticket_dsc_asunto" Type="String" MaxLength="5000" FixedLength="false" Unicode="true" />
-          <Property Name="ticket_est_ticket" Type="Int64" />
-          <Property Name="ticket_fec_vencimiento" Type="DateTime" Precision="6" />
-          <Property Name="ticket_cod_gravedad" Type="Int64" />
-          <Property Name="usuarioasig_cod_usuarioasign" Type="Int64" />
-        </EntityType>
-        <EntityType Name="prueba">
-          <Key>
-            <PropertyRef Name="nombre" />
-          </Key>
-          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="myticketEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="mt_tab_ticket" EntityType="Self.mt_tab_ticket" />
-          <EntitySet Name="prueba" EntityType="Self.prueba" />
+          <EntitySet Name="mt_tab_areas" EntityType="myticketModel.mt_tab_areas" />
           <EntitySet Name="mt_tab_comuna" EntityType="myticketModel.mt_tab_comuna" />
           <EntitySet Name="mt_tab_direccion" EntityType="myticketModel.mt_tab_direccion" />
           <EntitySet Name="mt_tab_persona" EntityType="myticketModel.mt_tab_persona" />
           <EntitySet Name="mt_tab_region" EntityType="myticketModel.mt_tab_region" />
           <EntitySet Name="mt_tab_rol" EntityType="myticketModel.mt_tab_rol" />
           <EntitySet Name="mt_tab_rolusua" EntityType="myticketModel.mt_tab_rolusua" />
+          <EntitySet Name="mt_tab_ticket" EntityType="myticketModel.mt_tab_ticket" />
           <EntitySet Name="mt_tab_usuario" EntityType="myticketModel.mt_tab_usuario" />
-          <AssociationSet Name="fk_Comuna" Association="myticketModel.fk_Comuna">
+          <EntitySet Name="prueba" EntityType="myticketModel.prueba" />
+          <AssociationSet Name="fk_areas" Association="myticketModel.fk_areas">
+            <End Role="mt_tab_areas" EntitySet="mt_tab_areas" />
+            <End Role="mt_tab_usuario" EntitySet="mt_tab_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_com_region" Association="myticketModel.fk_com_region">
             <End Role="mt_tab_region" EntitySet="mt_tab_region" />
             <End Role="mt_tab_comuna" EntitySet="mt_tab_comuna" />
           </AssociationSet>
-          <AssociationSet Name="fk_direccion1" Association="myticketModel.fk_direccion1">
+          <AssociationSet Name="fk_dir_com" Association="myticketModel.fk_dir_com">
             <End Role="mt_tab_comuna" EntitySet="mt_tab_comuna" />
             <End Role="mt_tab_direccion" EntitySet="mt_tab_direccion" />
           </AssociationSet>
@@ -270,6 +279,14 @@
             <End Role="mt_tab_rolusua" EntitySet="mt_tab_rolusua" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="mt_tab_areas">
+          <Key>
+            <PropertyRef Name="area_cod_area" />
+          </Key>
+          <Property Name="area_cod_area" Type="Int64" Nullable="false" />
+          <Property Name="area_nombre_area" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="mt_tab_usuario" Relationship="myticketModel.fk_areas" FromRole="mt_tab_areas" ToRole="mt_tab_usuario" />
+        </EntityType>
         <EntityType Name="mt_tab_comuna">
           <Key>
             <PropertyRef Name="comuna_cod_comuna" />
@@ -278,8 +295,10 @@
           <Property Name="comuna_nom_comuna" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="comuna_ciudad_comuna" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="comuna_cod_region" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="mt_tab_region" Relationship="myticketModel.fk_Comuna" FromRole="mt_tab_comuna" ToRole="mt_tab_region" />
-          <NavigationProperty Name="mt_tab_direccion" Relationship="myticketModel.fk_direccion1" FromRole="mt_tab_comuna" ToRole="mt_tab_direccion" />
+          <Property Name="comuna_fecha_vigencia" Type="Time" Precision="6" />
+          <Property Name="comuna_fin_vigencia" Type="Time" Precision="6" />
+          <NavigationProperty Name="mt_tab_region" Relationship="myticketModel.fk_com_region" FromRole="mt_tab_comuna" ToRole="mt_tab_region" />
+          <NavigationProperty Name="mt_tab_direccion" Relationship="myticketModel.fk_dir_com" FromRole="mt_tab_comuna" ToRole="mt_tab_direccion" />
         </EntityType>
         <EntityType Name="mt_tab_direccion">
           <Key>
@@ -289,7 +308,7 @@
           <Property Name="direccion_dsc_direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="direccion_num_direccion" Type="Decimal" Precision="10" Scale="0" />
           <Property Name="comuna_cod_comuna" Type="Int64" />
-          <NavigationProperty Name="mt_tab_comuna" Relationship="myticketModel.fk_direccion1" FromRole="mt_tab_direccion" ToRole="mt_tab_comuna" />
+          <NavigationProperty Name="mt_tab_comuna" Relationship="myticketModel.fk_dir_com" FromRole="mt_tab_direccion" ToRole="mt_tab_comuna" />
           <NavigationProperty Name="mt_tab_persona" Relationship="myticketModel.fk_direccion" FromRole="mt_tab_direccion" ToRole="mt_tab_persona" />
         </EntityType>
         <EntityType Name="mt_tab_persona">
@@ -316,7 +335,9 @@
           </Key>
           <Property Name="region_cod_region" Type="Int64" Nullable="false" />
           <Property Name="region_dsc_region" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="mt_tab_comuna" Relationship="myticketModel.fk_Comuna" FromRole="mt_tab_region" ToRole="mt_tab_comuna" />
+          <Property Name="region_fecha_vigencia" Type="Time" Precision="6" />
+          <Property Name="region_fin_vigencia" Type="Time" Precision="6" />
+          <NavigationProperty Name="mt_tab_comuna" Relationship="myticketModel.fk_com_region" FromRole="mt_tab_region" ToRole="mt_tab_comuna" />
         </EntityType>
         <EntityType Name="mt_tab_rol">
           <Key>
@@ -338,6 +359,24 @@
           <NavigationProperty Name="mt_tab_rol" Relationship="myticketModel.fk_rol" FromRole="mt_tab_rolusua" ToRole="mt_tab_rol" />
           <NavigationProperty Name="mt_tab_usuario" Relationship="myticketModel.fk_rolusua" FromRole="mt_tab_rolusua" ToRole="mt_tab_usuario" />
         </EntityType>
+        <EntityType Name="mt_tab_ticket">
+          <Key>
+            <PropertyRef Name="ticket_cod_ticket" />
+          </Key>
+          <Property Name="ticket_cod_ticket" Type="Int64" Nullable="false" />
+          <Property Name="ticket_fec_creacion" Type="DateTime" Precision="6" />
+          <Property Name="ticket_fec_respuesta" Type="DateTime" Precision="6" />
+          <Property Name="ticket_cod_usuaingreso" Type="Int64" />
+          <Property Name="ticket_cod_usuaresponde" Type="Int64" />
+          <Property Name="ticket_dsc_detalle" Type="String" MaxLength="5000" FixedLength="false" Unicode="true" />
+          <Property Name="ticket_es_masivo" Type="Boolean" />
+          <Property Name="ticket_cod_tipoatencion" Type="Int64" />
+          <Property Name="ticket_dsc_asunto" Type="String" MaxLength="5000" FixedLength="false" Unicode="true" />
+          <Property Name="ticket_est_ticket" Type="Int64" />
+          <Property Name="ticket_fec_vencimiento" Type="DateTime" Precision="6" />
+          <Property Name="ticket_cod_gravedad" Type="Int64" />
+          <Property Name="usuarioasig_cod_usuarioasign" Type="Int64" />
+        </EntityType>
         <EntityType Name="mt_tab_usuario">
           <Key>
             <PropertyRef Name="usuario_cod_usuario" />
@@ -345,13 +384,34 @@
           <Property Name="usuario_cod_usuario" Type="Int64" Nullable="false" />
           <Property Name="usuario_cod_estado" Type="Int64" />
           <Property Name="usuario_cod_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="usuario_dsc_area" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="persona_cod_persona" Type="Int64" />
+          <Property Name="usuario_cod_persona" Type="Int64" />
           <Property Name="usuario_nick_usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_cod_area" Type="Int64" />
+          <Property Name="usuario_token_usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="mt_tab_areas" Relationship="myticketModel.fk_areas" FromRole="mt_tab_usuario" ToRole="mt_tab_areas" />
           <NavigationProperty Name="mt_tab_persona" Relationship="myticketModel.fk_persona" FromRole="mt_tab_usuario" ToRole="mt_tab_persona" />
           <NavigationProperty Name="mt_tab_rolusua" Relationship="myticketModel.fk_rolusua" FromRole="mt_tab_usuario" ToRole="mt_tab_rolusua" />
         </EntityType>
-        <Association Name="fk_Comuna">
+        <EntityType Name="prueba">
+          <Key>
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="apellidos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="fk_areas">
+          <End Type="myticketModel.mt_tab_areas" Role="mt_tab_areas" Multiplicity="0..1" />
+          <End Type="myticketModel.mt_tab_usuario" Role="mt_tab_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mt_tab_areas">
+              <PropertyRef Name="area_cod_area" />
+            </Principal>
+            <Dependent Role="mt_tab_usuario">
+              <PropertyRef Name="usuario_cod_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_com_region">
           <End Type="myticketModel.mt_tab_region" Role="mt_tab_region" Multiplicity="1" />
           <End Type="myticketModel.mt_tab_comuna" Role="mt_tab_comuna" Multiplicity="*" />
           <ReferentialConstraint>
@@ -363,7 +423,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_direccion1">
+        <Association Name="fk_dir_com">
           <End Type="myticketModel.mt_tab_comuna" Role="mt_tab_comuna" Multiplicity="0..1" />
           <End Type="myticketModel.mt_tab_direccion" Role="mt_tab_direccion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -395,7 +455,7 @@
               <PropertyRef Name="persona_cod_persona" />
             </Principal>
             <Dependent Role="mt_tab_usuario">
-              <PropertyRef Name="persona_cod_persona" />
+              <PropertyRef Name="usuario_cod_persona" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -423,42 +483,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="myticketModelStoreContainer" CdmEntityContainer="myticketEntities">
-          <EntitySetMapping Name="mt_tab_ticket">
-            <EntityTypeMapping TypeName="myticketModel.mt_tab_ticket">
-              <MappingFragment StoreEntitySet="mt_tab_ticket">
-                <ScalarProperty Name="ticket_cod_ticket" ColumnName="ticket_cod_ticket" />
-                <ScalarProperty Name="ticket_fec_creacion" ColumnName="ticket_fec_creacion" />
-                <ScalarProperty Name="ticket_fec_respuesta" ColumnName="ticket_fec_respuesta" />
-                <ScalarProperty Name="ticket_cod_usuaingreso" ColumnName="ticket_cod_usuaingreso" />
-                <ScalarProperty Name="ticket_cod_usuaresponde" ColumnName="ticket_cod_usuaresponde" />
-                <ScalarProperty Name="ticket_dsc_detalle" ColumnName="ticket_dsc_detalle" />
-                <ScalarProperty Name="ticket_es_masivo" ColumnName="ticket_es_masivo" />
-                <ScalarProperty Name="ticket_cod_tipoatencion" ColumnName="ticket_cod_tipoatencion" />
-                <ScalarProperty Name="ticket_dsc_asunto" ColumnName="ticket_dsc_asunto" />
-                <ScalarProperty Name="ticket_est_ticket" ColumnName="ticket_est_ticket" />
-                <ScalarProperty Name="ticket_fec_vencimiento" ColumnName="ticket_fec_vencimiento" />
-                <ScalarProperty Name="ticket_cod_gravedad" ColumnName="ticket_cod_gravedad" />
-                <ScalarProperty Name="usuarioasig_cod_usuarioasign" ColumnName="usuarioasig_cod_usuarioasign" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="prueba">
-            <EntityTypeMapping TypeName="myticketModel.prueba">
-              <MappingFragment StoreEntitySet="prueba">
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <EntitySetMapping Name="mt_tab_areas">
+            <EntityTypeMapping TypeName="myticketModel.mt_tab_areas">
+              <MappingFragment StoreEntitySet="mt_tab_areas">
+                <ScalarProperty Name="area_nombre_area" ColumnName="area_nombre_area" />
+                <ScalarProperty Name="area_cod_area" ColumnName="area_cod_area" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="mt_tab_comuna">
             <EntityTypeMapping TypeName="myticketModel.mt_tab_comuna">
               <MappingFragment StoreEntitySet="mt_tab_comuna">
+                <ScalarProperty Name="comuna_fin_vigencia" ColumnName="comuna_fin_vigencia" />
+                <ScalarProperty Name="comuna_fecha_vigencia" ColumnName="comuna_fecha_vigencia" />
                 <ScalarProperty Name="comuna_cod_region" ColumnName="comuna_cod_region" />
                 <ScalarProperty Name="comuna_ciudad_comuna" ColumnName="comuna_ciudad_comuna" />
                 <ScalarProperty Name="comuna_nom_comuna" ColumnName="comuna_nom_comuna" />
@@ -496,6 +539,8 @@
           <EntitySetMapping Name="mt_tab_region">
             <EntityTypeMapping TypeName="myticketModel.mt_tab_region">
               <MappingFragment StoreEntitySet="mt_tab_region">
+                <ScalarProperty Name="region_fin_vigencia" ColumnName="region_fin_vigencia" />
+                <ScalarProperty Name="region_fecha_vigencia" ColumnName="region_fecha_vigencia" />
                 <ScalarProperty Name="region_dsc_region" ColumnName="region_dsc_region" />
                 <ScalarProperty Name="region_cod_region" ColumnName="region_cod_region" />
               </MappingFragment>
@@ -520,15 +565,43 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="mt_tab_ticket">
+            <EntityTypeMapping TypeName="myticketModel.mt_tab_ticket">
+              <MappingFragment StoreEntitySet="mt_tab_ticket">
+                <ScalarProperty Name="usuarioasig_cod_usuarioasign" ColumnName="usuarioasig_cod_usuarioasign" />
+                <ScalarProperty Name="ticket_cod_gravedad" ColumnName="ticket_cod_gravedad" />
+                <ScalarProperty Name="ticket_fec_vencimiento" ColumnName="ticket_fec_vencimiento" />
+                <ScalarProperty Name="ticket_est_ticket" ColumnName="ticket_est_ticket" />
+                <ScalarProperty Name="ticket_dsc_asunto" ColumnName="ticket_dsc_asunto" />
+                <ScalarProperty Name="ticket_cod_tipoatencion" ColumnName="ticket_cod_tipoatencion" />
+                <ScalarProperty Name="ticket_es_masivo" ColumnName="ticket_es_masivo" />
+                <ScalarProperty Name="ticket_dsc_detalle" ColumnName="ticket_dsc_detalle" />
+                <ScalarProperty Name="ticket_cod_usuaresponde" ColumnName="ticket_cod_usuaresponde" />
+                <ScalarProperty Name="ticket_cod_usuaingreso" ColumnName="ticket_cod_usuaingreso" />
+                <ScalarProperty Name="ticket_fec_respuesta" ColumnName="ticket_fec_respuesta" />
+                <ScalarProperty Name="ticket_fec_creacion" ColumnName="ticket_fec_creacion" />
+                <ScalarProperty Name="ticket_cod_ticket" ColumnName="ticket_cod_ticket" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="mt_tab_usuario">
             <EntityTypeMapping TypeName="myticketModel.mt_tab_usuario">
               <MappingFragment StoreEntitySet="mt_tab_usuario">
+                <ScalarProperty Name="usuario_token_usuario" ColumnName="usuario_token_usuario" />
+                <ScalarProperty Name="usuario_cod_area" ColumnName="usuario_cod_area" />
                 <ScalarProperty Name="usuario_nick_usuario" ColumnName="usuario_nick_usuario" />
-                <ScalarProperty Name="persona_cod_persona" ColumnName="persona_cod_persona" />
-                <ScalarProperty Name="usuario_dsc_area" ColumnName="usuario_dsc_area" />
+                <ScalarProperty Name="usuario_cod_persona" ColumnName="usuario_cod_persona" />
                 <ScalarProperty Name="usuario_cod_password" ColumnName="usuario_cod_password" />
                 <ScalarProperty Name="usuario_cod_estado" ColumnName="usuario_cod_estado" />
                 <ScalarProperty Name="usuario_cod_usuario" ColumnName="usuario_cod_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prueba">
+            <EntityTypeMapping TypeName="myticketModel.prueba">
+              <MappingFragment StoreEntitySet="prueba">
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -24,6 +24,8 @@ namespace MyTicketAdmin
         public string comuna_nom_comuna { get; set; }
         public string comuna_ciudad_comuna { get; set; }
         public long comuna_cod_region { get; set; }
+        public Nullable<System.TimeSpan> comuna_fecha_vigencia { get; set; }
+        public Nullable<System.TimeSpan> comuna_fin_vigencia { get; set; }
     
         public virtual mt_tab_region mt_tab_region { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

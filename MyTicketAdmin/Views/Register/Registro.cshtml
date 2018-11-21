@@ -1,112 +1,143 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model IEnumerable<MyTicketAdmin.mt_tab_usuario>
 
-<!DOCTYPE html public>
-<html lang="es-cl">
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <meta http-equiv="content-type" content="text/html" charset="utf-8" />
-    <link rel="stylesheet" href="~/Estilos/cssRegistro.css" />
-    <title>Registro</title>
-</head>
-<body>
-    <header>
-        <div id="dCabecera">
-            <img id="imgCabecera" alt="logo" src="/Images/banner4.PNG" width="860" height="171">
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html public>
+    <html lang="es-cl">
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="content-type" content="text/html" charset="utf-8" />
+        <link rel="stylesheet" href="~/Estilos/cssRegistro.css" />
+        <title>Registro</title>
+    </head>
+    <body>
+        <!--<header>
+            <div id="dCabecera">
+                <img id="imgCabecera" alt="logo" src="/Images/banner4.PNG" width="860" height="171">
+            </div>
+        </header>-->
+        <div class="central">
+            <div id="dDatosPersona">
+                <table class="registro" id="tblDatosPersonales">
+                    <caption><strong>Datos personales</strong></caption>
+                    <tr>
+                        <td>
+                            <label for="inRut" class="lbTblPersona"><strong>Ingresar rut</strong> </label>
+                            <input type="text" id="inRut" maxlength="8" />
+                        </td>
+                        <td>
+                            <label for="inDV" class="lbTblPersona"><strong>Ingresar digito verificador</strong> </label>
+                            <input type="text" id="inDV" maxlength="1" />
+                        </td>
+                        <td>
+                            <label for="inFNac" class="lbTblPersona"><strong>Ingresar fecha de nacimiento</strong> </label>
+                            <input type="date" id="inFNac" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="inPNombre" class="lbTblPersona"><strong>Ingresar primer nombre</strong> </label>
+                            <input type="text" id="inPNombre" />
+                        </td>
+                        <td>
+                            <label for="inSNombre" class="lbTblPersona"><strong>Ingresar segundo nombre</strong> </label>
+                            <input type="text" id="inSNombre" />
+                        </td>
+                        <td>
+                            <label for="inApPat" class="lbTblPersona"><strong>Ingrese primer apellido</strong> </label>
+                            <input type="text" id="inApPat" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="inApMat" class="lbTblPersona"><strong>Ingrese segundo apellido</strong></label>
+                            <input type="text" id="inApMat" />
+                        </td>
+                        <td>
+                            <label for="inTelFijo" class="lbTblPersona"><strong>Ingrese telefono fijo</strong> </label>
+                            <input type="tel" id="inTelFijo" />
+                        </td>
+                        <td>
+                            <label for="inTelCel" class="lbTblPersona"><strong>Ingrese telefono celular</strong> </label>
+                            <input type="tel" id="inTelCel" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="inEmail" class="lbTblPersona"><strong>Ingrese mail </strong></label>
+                            <input type="email" id="inEmail" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="dDatosDomicilio">
+                <table class="registro" id="tblDatosDomicilio">
+                    <caption><strong>Region</strong> </caption>
+                    <tr>
+                        <th><label for="selRegion" class="lbTblPersona"> Region</label></th>
+                        <th><label for="inCiudad" class="lbTblPersona">Ciudad</label></th>
+                        <th><label for="inComuna" class="lbTblPersona">Comuna</label></th>
+                        <th><label for="inDireccion" class="lbTblPersona">Direccion</label></th>
+                        <th><label for="inNumCasa" class="lbTblPersona"> Numero de casa</label></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select id="selRegion">
+                                <option>Seleccione</option>
+                                <option>Metropolitana</option>
+                                <option>Araucania</option>
+                                <option>Bio Bio</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" id="inCiudad" />
+                        </td>
+                        <td>
+                            <input type="text" id="inComuna" />
+                        </td>
+                        <td>
+                            <input type="text" id="inDireccion" />
+                        </td>
+                        <td>
+                            <input type="text" id="inNumCasa" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <input type="button" id="PruebaIngreso" value="Ingresar" />
         </div>
-    </header>
-    <div class="central">
-        <div id="dDatosPersona">
-            <table class="registro" id="tblDatosPersonales">
-                <caption><strong>Datos personales</strong></caption>
+
+        <div id="tblDatosRegistrados">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cod Usuario</th>
+                        <th>NickName</th>
+                        <th>Area</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                @foreach (var user in Model)
+                {
                 <tr>
                     <td>
-                        <label for="inRut" class="lbTblPersona"><strong>Ingresar rut</strong> </label>
-                        <input type="text" id="inRut" maxlength="8" />
+                        @Html.DisplayFor(ModelItem => user.usuario_cod_usuario);
                     </td>
                     <td>
-                        <label for="inDV" class="lbTblPersona"><strong>Ingresar digito verificador</strong> </label>
-                        <input type="text" id="inDV" maxlength="1" />
+                        @Html.DisplayFor(ModelItem => user.usuario_nick_usuario);
                     </td>
                     <td>
-                        <label for="inFNac" class="lbTblPersona"><strong>Ingresar fecha de nacimiento</strong> </label>
-                        <input type="date" id="inFNac" />
+                        @Html.DisplayFor(ModelItem => user.mt_tab_areas.area_nombre_area);
+                    </td>
+                    <td>
+                        @Html.DisplayFor(ModelItem => user.usuario_cod_estado);
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <label for="inPNombre" class="lbTblPersona"><strong>Ingresar primer nombre</strong> </label>
-                        <input type="text" id="inPNombre" />
-                    </td>
-                    <td>
-                        <label for="inSNombre" class="lbTblPersona"><strong>Ingresar segundo nombre</strong> </label>
-                        <input type="text" id="inSNombre" />
-                    </td>
-                    <td>
-                        <label for="inApPat" class="lbTblPersona"><strong>Ingrese primer apellido</strong> </label>
-                        <input type="text" id="inApPat" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="inApMat" class="lbTblPersona"><strong>Ingrese segundo apellido</strong></label>
-                        <input type="text" id="inApMat" />
-                    </td>
-                    <td>
-                        <label for="inTelFijo" class="lbTblPersona"><strong>Ingrese telefono fijo</strong> </label>
-                        <input type="tel" id="inTelFijo" />
-                    </td>
-                    <td>
-                        <label for="inTelCel" class="lbTblPersona"><strong>Ingrese telefono celular</strong> </label>
-                        <input type="tel" id="inTelCel" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="inEmail" class="lbTblPersona"><strong>Ingrese mail </strong></label>
-                        <input type="email" id="inEmail" />
-                    </td>
-                </tr>
+                }
             </table>
         </div>
-        <div id="dDatosDomicilio">
-            <table class="registro" id="tblDatosDomicilio">
-                <caption><strong>Region</strong> </caption>
-                <tr>
-                    <th><label for="selRegion" class="lbTblPersona"> Region</label></th>
-                    <th><label for="inCiudad" class="lbTblPersona">Ciudad</label></th>
-                    <th><label for="inComuna" class="lbTblPersona">Comuna</label></th>
-                    <th><label for="inDireccion" class="lbTblPersona">Direccion</label></th>
-                    <th><label for="inNumCasa" class="lbTblPersona"> Numero de casa</label></th>
-                </tr>
-                <tr>
-                    <td>
-                        <select id="selRegion">
-                            <option>Seleccione</option>
-                            <option>Metropolitana</option>
-                            <option>Araucania</option>
-                            <option>Bio Bio</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" id="inCiudad" />
-                    </td>
-                    <td>
-                        <input type="text" id="inComuna" />
-                    </td>
-                    <td>
-                        <input type="text" id="inDireccion" />
-                    </td>
-                    <td>
-                        <input type="text" id="inNumCasa" />
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <input type="button" id="PruebaIngreso" value="Ingresar" />
-    </div>
-    <p>@Html.ActionLink("Regresar", "Index", "Home")</p>
-</body>
+        <p>@Html.ActionLink("Regresar", "Index", "Home")</p>
+    </body>
 </html>

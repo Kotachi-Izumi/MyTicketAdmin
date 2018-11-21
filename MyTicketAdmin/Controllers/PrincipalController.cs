@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Security.Authentication;
+using MyTicketAdmin.Models.DatosObj;
 
 namespace MyTicketAdmin.Controllers
 {
@@ -13,6 +14,13 @@ namespace MyTicketAdmin.Controllers
         public ActionResult Principal()
         {
             return View();
+        }
+
+        public ActionResult btnMail()
+        {
+            EnvioMail.sendMail();
+              
+            return null;
         }
 
         /*public ActionResult logueo()

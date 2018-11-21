@@ -22,6 +22,8 @@ namespace MyTicketAdmin
     
         public long region_cod_region { get; set; }
         public string region_dsc_region { get; set; }
+        public Nullable<System.TimeSpan> region_fecha_vigencia { get; set; }
+        public Nullable<System.TimeSpan> region_fin_vigencia { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<mt_tab_comuna> mt_tab_comuna { get; set; }

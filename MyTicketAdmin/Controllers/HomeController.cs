@@ -24,7 +24,7 @@ namespace MyTicketAdmin.Controllers
             var user = Request.Form["inUsuario"].ToString();
             var pass = Request.Form["inpPass"].ToString();
             var con = new ConPG();
-            con.ingresarPersona(per, dir);
+            //con.ingresarPersona(per, dir);
             if (ConPG.autenticar(user, pass))
             {
                 //FormsAuthentication.RedirectFromLoginPage(user, false)

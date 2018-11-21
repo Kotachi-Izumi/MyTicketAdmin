@@ -16,7 +16,7 @@
 }
 
 th, td{
-    text-align:center;
+	text-align:center;
 	width:200px;
 	padding:20PX;
 }
@@ -39,7 +39,7 @@ caption {
 }
 .lbTblPersona{
 	padding-bottom:8px;
-    display:inline-block;
+	display:inline-block;
 }
 
 /*Pagina principal*/
@@ -62,10 +62,15 @@ caption {
 
 }
 #cuerpoInfo{
-	max-width:500px;
-	width:auto;
+	
+	width:100%;
 	margin:0 auto;
 	background-color:crimson;
+}
+
+#ifInfo{
+	width:100%;
+	height:100%;
 }
 
 

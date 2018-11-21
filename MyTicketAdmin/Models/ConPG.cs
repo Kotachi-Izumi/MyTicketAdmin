@@ -78,19 +78,19 @@ namespace MyTicketAdmin.Controllers
 
         public void ingresarPersona(MPersona per, MDireccion dir)
         {
-            per.AppMaterno = "Ocampo";
-            per.AppPaterno = "Palacios";
-            per.CodPersona = 2;
-            per.DV = "5";
-            per.Fnac = Convert.ToDateTime("1986-11-21");
+            per.AppMaterno = "GARRIDO";
+            per.AppPaterno = "VALENZUELA";
+            per.CodPersona = 3;
+            per.DV = "0";
+            per.Fnac = Convert.ToDateTime("1986-02-10");
             per.Fono = "222222222";
-            per.Mail = "julian.palacios@email.com";
-            per.nombre = "Julian Andres";
-            per.Rut = 24089142;
-            per.CodDireccion = 2;
-            per.Celular = "953439463";
+            per.Mail = "bernycita1986@hotmail.com";
+            per.nombre = "BERNARDITA";
+            per.Rut = 15246785;
+            per.CodDireccion = 3;
+            per.Celular = "973898507";
 
-            dir.CodDireccion = 2;
+            dir.CodDireccion = 3;
             dir.CodComuna = 1;
             dir.DescCasa = "Lord Cochrane";
             dir.NumCasa = 184;

@@ -9,10 +9,11 @@ namespace MyTicketAdmin.Controllers
 {
     public class RegisterController : Controller
     {
+        private myticketEntities myTicket = new myticketEntities();
         // GET: Register
         public ActionResult Registro()
         {
-            return View("~\\Views\\Register\\Registro.cshtml");
+            return View("~\\Views\\Register\\Registro.cshtml",myTicket.mt_tab_usuario.ToList());
         }
 
         public ActionResult AsigRol()
