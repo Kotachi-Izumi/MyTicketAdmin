@@ -1,6 +1,7 @@
 ﻿
 @{
     Layout = null;
+    var a = "";
 }
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
     <link rel="stylesheet" href="~/Estilos/cssRegistro.css" />
 </head>
 <body>
-    @RenderPage("~\\Views\\Register\\_Header.cshtml")
+   
     <div id="pos">
         <h1>Panel de control</h1>
     </div>
@@ -21,6 +22,7 @@
             <h1><Strong>Menu</Strong></h1>
             
             <ul>
+                <li> <a href="../Register/IngresoPersona" " target="ifInfo">Ingresar persona</a></li>
                 <li>@Html.ActionLink("Registrar usuario","Registro","Register")</li>
                 <li>Eliminacion usuario</li>
                 <li>Modificacion usuario</li>
@@ -31,6 +33,7 @@
             </ul>
         </aside> 
         <div id="cuerpoInfo" name="cuerpoInfo">
+            @Html.Partial("IngresoPersona");
             <iframe id="ifInfo" name="ifInfo"></iframe>
         </div>
     </div>

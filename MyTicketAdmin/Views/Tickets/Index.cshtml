@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MyTicketAdmin.mt_tab_ticket>
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <table>
+            <thead>
+                    <tr>
+                        <th>Codigo Estado</th>
+                        <th>Codigo Gravedad</th>
+                        <th>Codigo Ticket</th>
+                        <th>Tipo Atencion</th>
+                        <th>Usuario Ingreso</th>
+                        <th>Descripcion </th>
+                        <th>Detalle Ticket</th>
+                        <th>Es Masivo</th>
+                        <th>Fecha Respuesta</th>
+                        <th>Fecha Vencimiento</th>
+                    </tr>
+            </thead>
+            <tbody>
+                @foreach(var tickets in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => tickets.ticket_est_ticket)</td>
+                        <td>@Html.DisplayFor(model => tickets.ticket_cod_gravedad)</td>
+                        <td>@Html.DisplayFor(model => tickets.ticket_cod_ticket)</td>
+                        <td>@Html.DisplayFor(model => tickets.ticket_cod_tipoatencion)</td>
+                        <td>@Html.DisplayFor(model => tickets.ticket_cod_usuaingreso)</td>
+                        <td>@Html.DisplayFor(model => tickets.ticket_dsc_detalle)</td>
+                        <td>@Html.DisplayFor(model => tickets.ticket_dsc_asunto)</td>
+                        <td>@Html.DisplayFor(model => tickets.ticket_es_masivo)</td>
+                        <td>@Html.DisplayFor(model => tickets.ticket_fec_respuesta)</td>
+                        <td>@Html.DisplayFor(model => tickets.ticket_fec_vencimiento)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+       
+    </div>
+</body>
+</html>

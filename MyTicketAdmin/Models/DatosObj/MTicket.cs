@@ -7,6 +7,7 @@ namespace MyTicketAdmin.Models.DatosObj
 {
     public class MTicket
     {
+
         public int codTicket { get; set; }
         public int codUsuarioIngreso { get; set; }
         public int codUsuarioResponde { get; set; }

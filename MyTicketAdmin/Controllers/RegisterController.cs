@@ -10,6 +10,7 @@ namespace MyTicketAdmin.Controllers
     public class RegisterController : Controller
     {
         private myticketEntities myTicket = new myticketEntities();
+        private MPersona Mper = new MPersona();
         // GET: Register
         public ActionResult Registro()
         {
@@ -30,6 +31,10 @@ namespace MyTicketAdmin.Controllers
                 pg.ingresarPersona(per, dir);
             
             return null;
+        }
+        public ActionResult IngresoPersona()
+        {
+            return View("~\\Views\\Register\\IngresoPersona.cshtml",Mper);
         }
     }
 }

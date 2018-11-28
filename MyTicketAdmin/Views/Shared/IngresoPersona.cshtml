@@ -1,0 +1,43 @@
+﻿@model MyTicketAdmin.Models.DatosObj.MPersona
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    @using (Html.BeginForm())
+    {
+        Html.LabelFor(model => model.nombre);
+        Html.TextBoxFor(model => model.nombre);
+
+        Html.LabelFor(model => model.AppPaterno);
+        Html.TextBoxFor(model => model.AppPaterno);
+
+        Html.LabelFor(model => model.AppMaterno);
+        Html.TextBoxFor(model => model.AppMaterno);
+
+        Html.LabelFor(model => model.Rut);
+        Html.TextBoxFor(model => model.Rut);
+
+        Html.LabelFor(model => model.DV);
+        Html.TextBoxFor(model => model.DV);
+
+        Html.LabelFor(model => model.Fnac);
+        Html.EditorFor(model => model.Fnac);
+
+        Html.LabelFor(model => model.Fono);
+        Html.TextBoxFor(model => model.Fono);
+
+        Html.LabelFor(model => model.Celular);
+        Html.TextBoxFor(model => model.Celular);
+
+        Html.LabelFor(model => model.Mail);
+        Html.EditorFor(model => model.Mail);
+
+
+    }
+</body>
+</html>

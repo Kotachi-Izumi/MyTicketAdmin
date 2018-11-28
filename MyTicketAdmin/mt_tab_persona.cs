@@ -20,7 +20,6 @@ namespace MyTicketAdmin
             this.mt_tab_usuario = new HashSet<mt_tab_usuario>();
         }
     
-        public long persona_cod_persona { get; set; }
         public decimal persona_num_rut { get; set; }
         public string persona_num_dv { get; set; }
         public string persona_dsc_nombre { get; set; }
@@ -31,8 +30,8 @@ namespace MyTicketAdmin
         public string persona_num_celular { get; set; }
         public string persona_dsc_mail { get; set; }
         public Nullable<long> direccion_cod_direccion { get; set; }
+        public long persona_cod_persona { get; set; }
     
-        public virtual mt_tab_direccion mt_tab_direccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<mt_tab_usuario> mt_tab_usuario { get; set; }
     }

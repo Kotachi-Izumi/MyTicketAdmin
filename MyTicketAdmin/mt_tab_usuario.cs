@@ -20,13 +20,13 @@ namespace MyTicketAdmin
             this.mt_tab_rolusua = new HashSet<mt_tab_rolusua>();
         }
     
-        public long usuario_cod_usuario { get; set; }
         public Nullable<long> usuario_cod_estado { get; set; }
         public string usuario_cod_password { get; set; }
         public Nullable<long> usuario_cod_persona { get; set; }
         public string usuario_nick_usuario { get; set; }
         public Nullable<long> usuario_cod_area { get; set; }
         public string usuario_token_usuario { get; set; }
+        public long usuario_cod_usuario { get; set; }
     
         public virtual mt_tab_areas mt_tab_areas { get; set; }
         public virtual mt_tab_persona mt_tab_persona { get; set; }

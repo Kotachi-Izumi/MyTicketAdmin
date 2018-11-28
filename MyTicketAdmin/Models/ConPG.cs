@@ -76,6 +76,8 @@ namespace MyTicketAdmin.Controllers
             return log;
         }
 
+
+
         public void ingresarPersona(MPersona per, MDireccion dir)
         {
             per.AppMaterno = "GARRIDO";
@@ -113,6 +115,8 @@ namespace MyTicketAdmin.Controllers
                 mtPer.persona_num_rut = per.Rut;
                 mtPer.persona_num_dv = per.DV;
                 mtPer.direccion_cod_direccion = per.CodDireccion;
+
+                
 
                 myticket.mt_tab_direccion.Add(mtDir);
                 myticket.mt_tab_persona.Add(mtPer);

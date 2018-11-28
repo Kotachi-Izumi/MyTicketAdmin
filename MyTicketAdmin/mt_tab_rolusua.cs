@@ -14,11 +14,11 @@ namespace MyTicketAdmin
     
     public partial class mt_tab_rolusua
     {
-        public long rolusua_cod_rolusua { get; set; }
         public Nullable<long> rol_cod_rol { get; set; }
         public Nullable<long> usuario_cod_usuario { get; set; }
         public Nullable<System.DateTime> rolusua_fec_ini { get; set; }
         public Nullable<System.DateTime> rolusua_fec_fin { get; set; }
+        public long rolusua_cod_rolusua { get; set; }
     
         public virtual mt_tab_rol mt_tab_rol { get; set; }
         public virtual mt_tab_usuario mt_tab_usuario { get; set; }
