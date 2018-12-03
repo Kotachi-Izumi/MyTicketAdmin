@@ -13,7 +13,8 @@ namespace MyTicketAdmin.Controllers
         // GET: Principal
         public ActionResult Principal()
         {
-            return View();
+            var pers = new MPersona();
+            return View(pers);
         }
 
         public ActionResult btnMail()

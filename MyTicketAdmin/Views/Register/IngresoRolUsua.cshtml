@@ -1,0 +1,37 @@
+﻿@model MyTicketAdmin.Models.DatosObj.MRolUsuario
+@{
+    Layout = null;
+    var roles = MyTicketAdmin.Controllers.ConPG.roles();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IngresoRolUsua</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm("asignarRol","Register",FormMethod.Post))
+        {
+            @Html.LabelFor(model => model.codRol, "Codigo Rol")
+            @Html.TextBoxFor(model => model.codRol)
+
+            @Html.LabelFor(model => model.codUsuario, "Codigo Usuario")
+            @Html.TextBoxFor(model => model.codUsuario)
+
+            @Html.LabelFor(model => model.fechaInicio, "Fecha Inicio")
+            @Html.EditorFor(model => model.fechaInicio, "date")
+
+            @Html.LabelFor(model => model.fechaFin, "Fecha Fin")
+            @Html.EditorFor(model => model.fechaFin, "date")
+
+            <input type="submit" value="Guardar" id="grdRolUsu" name="grdRolUsu" />
+        }
+    </div>
+    <div>
+        @Html.Partial("~//Views//Shared//_Roles.cshtml")
+    </div>
+</body>
+</html>

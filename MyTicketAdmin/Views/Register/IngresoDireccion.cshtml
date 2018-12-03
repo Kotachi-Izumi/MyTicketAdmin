@@ -1,0 +1,34 @@
+﻿@model MyTicketAdmin.Models.DatosObj.MDireccion
+@{ 
+    var comunas = MyTicketAdmin.Controllers.ConPG.comunas();
+    var regiones = MyTicketAdmin.Controllers.ConPG.regiones();
+
+    
+}   
+ 
+@using (Html.BeginForm("guardarDireccion","Register",FormMethod.Post) ) {
+   
+     @Html.LabelFor(Model => Model.DescCasa,"Direccion")
+     @Html.TextBoxFor(Model => Model.DescCasa)
+    @Html.LabelFor(Model => Model.NumCasa,"No casa")
+    @Html.TextBoxFor(Model => Model.NumCasa)
+    
+
+    <select id="regiones" name="regiones">
+        @foreach (var reg in regiones)
+        {
+            <option value="@reg">@reg</option>
+        }
+    </select>
+    <select id="comunas" name="comunas">
+        @foreach (var com in comunas)
+        {
+            <option value="@com">@com</option>
+        }
+    </select>
+    <input type="submit" value="Enviar" />
+
+
+}
+
+    

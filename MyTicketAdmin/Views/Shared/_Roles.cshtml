@@ -1,0 +1,27 @@
+﻿@{
+    var roles = MyTicketAdmin.Controllers.ConPG.roles();
+
+}
+<table>
+    <thead>
+        <tr>
+            <th>Codigo de Rol</th>
+            <th>Nombre de Rol</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in roles)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(rol => item.Key)</td>
+                    <td>@Html.DisplayFor(rol => item.Value)</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+
+

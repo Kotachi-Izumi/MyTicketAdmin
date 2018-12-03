@@ -21,6 +21,7 @@ namespace MyTicketAdmin.Models.DatosObj
         public string detalleTicket { get; set; }
         public string descAsunto { get; set; }
         public bool esMasivo { get; set; }
+        public long codPersona { get; set; }
 
     }
 }

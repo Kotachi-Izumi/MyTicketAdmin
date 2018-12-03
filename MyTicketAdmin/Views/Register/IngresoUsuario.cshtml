@@ -1,0 +1,39 @@
+﻿@model MyTicketAdmin.Models.DatosObj.MUsuario
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IngresoUsuario</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm("guardarUsuario","Register",FormMethod.Post))
+        {
+            @Html.LabelFor(model => model.codArea, "Codigo Area")
+            @Html.TextBoxFor(model => model.codArea)
+
+            @Html.LabelFor(model => model.codEstado, "Codigo Estado")
+            @Html.TextBoxFor(model => model.codEstado)
+
+            @Html.LabelFor(model => model.codPersona, "Codigo Persona")
+            @Html.TextBoxFor(model => model.codPersona)
+
+            @Html.LabelFor(model => model.nick, "NickName")
+            @Html.TextBoxFor(model => model.nick)
+
+            @Html.LabelFor(model => model.pass, "Password")
+            @Html.EditorFor(model => model.pass, "password")
+
+            <input type="submit" value="Enviar" />
+        }
+    </div>
+    <div>
+        @Html.Partial("~//Views//Shared//_Areas.cshtml")
+    </div>
+</body>
+</html>

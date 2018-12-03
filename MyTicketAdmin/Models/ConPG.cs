@@ -4,6 +4,7 @@ using Npgsql;
 using NpgsqlTypes;
 using System.Linq;
 using MyTicketAdmin.Models.DatosObj;
+using System.Collections.Generic;
 
 namespace MyTicketAdmin.Controllers
 {
@@ -35,29 +36,7 @@ namespace MyTicketAdmin.Controllers
             con.Close();
         }
 
-        public Boolean agregar(int cod)
-        {
-
-            var log = false;
-            con.Open();
-
-            comandos = new NpgsqlCommand
-            {
-                Connection = con,
-                CommandText = "INSERT INTO mt_tab_region VALUES (@cod,'BIO BIO','15/07/2017','18/10/2018')",
-                CommandType = System.Data.CommandType.Text
-
-            };
-            comandos.Parameters.AddWithValue("@cod", cod);
-            var resultOk = comandos.ExecuteNonQuery();
-            if(resultOk > 0)
-            {
-                mensaje = "Agregado";
-            }
-            con.Close();
-            return log;
-        }
-
+        //Verifica si el usuario y el password ingresado esta registrado
         public static bool autenticar(string user, string pass)
         {
             var log = false;
@@ -76,57 +55,257 @@ namespace MyTicketAdmin.Controllers
             return log;
         }
 
-
-
-        public void ingresarPersona(MPersona per, MDireccion dir)
+        //Obtiene la lista de comunas
+        public static List<String> comunas()
         {
-            per.AppMaterno = "GARRIDO";
-            per.AppPaterno = "VALENZUELA";
-            per.CodPersona = 3;
-            per.DV = "0";
-            per.Fnac = Convert.ToDateTime("1986-02-10");
-            per.Fono = "222222222";
-            per.Mail = "bernycita1986@hotmail.com";
-            per.nombre = "BERNARDITA";
-            per.Rut = 15246785;
-            per.CodDireccion = 3;
-            per.Celular = "973898507";
-
-            dir.CodDireccion = 3;
-            dir.CodComuna = 1;
-            dir.DescCasa = "Lord Cochrane";
-            dir.NumCasa = 184;
-            using (myticketEntities myticket = new myticketEntities())
+            var lst = new List<String>();
+            using(var bd = new myticketEntities())
             {
-                var mtDir = new mt_tab_direccion();
-                var mtPer = new mt_tab_persona();
-                mtDir.comuna_cod_comuna = dir.CodComuna;
-                mtDir.direccion_cod_direccion = dir.CodDireccion;
-                mtDir.direccion_dsc_direccion = dir.DescCasa;
-                mtDir.direccion_num_direccion = dir.NumCasa;
+              
+                foreach(var com in bd.mt_tab_comuna)
+                {
+                    lst.Add(com.comuna_nom_comuna);
+                }
+            }
+            return lst;
+        }
+        //Obtiene la lista de regiones
+        public static List<string> regiones()
+        {
+            var regiones = new List<string>();
+            using (var bd = new myticketEntities())
+            {
+                foreach(var region in bd.mt_tab_region)
+                {
+                    regiones.Add(region.region_dsc_region);
+                }
+            }
+            return regiones;
+        }
+        //Obtiene la lista de areas con su codigo
+        public static Dictionary<int,string> areas()
+        {
+            var areas = new Dictionary<int,string>();
+            using (var bd = new myticketEntities())
+            {
+                foreach (var item in bd.mt_tab_areas)
+                {
+                    areas.Add((int)item.area_cod_area, item.area_nombre_area);
+                }
+            }
+            return areas;
+        }
+        //Obtiene la lista de roles con su codigo
+        public static Dictionary<int,string>roles(){
+            var roles = new Dictionary<int, string>();
+            using (var bd = new myticketEntities())
+            {
+                foreach(var item in bd.mt_tab_rol)
+                {
+                    roles.Add((int)item.rol_cod_rol, item.rol_dsc_rol);
+                }
+            }
+            return roles;
+            }
 
-                mtPer.persona_cod_persona = per.CodPersona;
-                mtPer.persona_dsc_apmaterno = per.AppMaterno;
-                mtPer.persona_dsc_appaterno = per.AppPaterno;
-                mtPer.persona_dsc_nombre = per.nombre;
-                mtPer.persona_fec_nacimiento = per.Fnac;
-                mtPer.persona_num_celular = per.Celular;
-                mtPer.persona_num_fono = per.Fono;
-                mtPer.persona_num_rut = per.Rut;
-                mtPer.persona_num_dv = per.DV;
-                mtPer.direccion_cod_direccion = per.CodDireccion;
+        //Busca el cliente por su id
+        public static MCliente buscarCliente(int idCLiente)
+        {
+            var id = idCLiente;
+            var cliente = new MCliente();
+            using(var per = new myticketEntities())
+            {
+                var persona = per.mt_tab_persona.Find(id);
+                var dir = per.mt_tab_direccion.Find((long)persona.direccion_cod_direccion);
+                var com = per.mt_tab_comuna.Find((long)dir.comuna_cod_comuna);
+                var reg = per.mt_tab_region.Find((long)com.comuna_cod_region);
+                cliente.apMaterno = persona.persona_dsc_apmaterno;
+                cliente.apPaterno = persona.persona_dsc_appaterno;
+                cliente.cel = persona.persona_num_celular;
+                cliente.dv = persona.persona_num_dv;
+                cliente.rut = (int)persona.persona_num_rut;
+                cliente.fNac = (DateTime)persona.persona_fec_nacimiento;
+                cliente.email = persona.persona_dsc_mail;
+                cliente.nombre = persona.persona_dsc_nombre;
+                cliente.codPersona = idCLiente;
+                cliente.comuna = com.comuna_nom_comuna;
+                cliente.region = reg.region_dsc_region;
+                cliente.descCasa = dir.direccion_dsc_direccion;
+                cliente.numCasa = (int)dir.direccion_num_direccion;
+            }
+            return cliente;
+        }
+        //buscar el ejecutivo que atendio la solicitud
+        public static MCSR buscarEjecutivo(int idUsuario)
+        {
+            var id = idUsuario;
+            var csr = new MCSR();
+            using (var per = new myticketEntities())
+            {
+                var usuario = per.mt_tab_usuario.Find(idUsuario);
+                var persona = per.mt_tab_persona.Find(usuario.usuario_cod_persona);
+                var dir = per.mt_tab_direccion.Find(persona.direccion_cod_direccion);
+                var com = per.mt_tab_comuna.Find(dir.comuna_cod_comuna);
+                var reg = per.mt_tab_region.Find(com.comuna_cod_region);
+                csr.apMaterno = persona.persona_dsc_apmaterno;
+                csr.apPaterno = persona.persona_dsc_appaterno;
+                csr.cel = persona.persona_num_celular;
+                csr.dv = persona.persona_num_dv;
+                csr.rut = (int)persona.persona_num_rut;
+                csr.fNac = (DateTime)persona.persona_fec_nacimiento;
+                csr.email = persona.persona_dsc_mail;
+                csr.nombre = persona.persona_dsc_nombre;
+                csr.codPersona = (int)persona.persona_cod_persona;
+                csr.comuna = com.comuna_nom_comuna;
+                csr.region = reg.region_dsc_region;
+                csr.descCasa = dir.direccion_dsc_direccion;
+                csr.numCasa = (int)dir.direccion_num_direccion;
+                csr.codArea = (int)usuario.usuario_cod_area;
+                csr.codEstado = (int)usuario.usuario_cod_estado;
+                csr.codUsuario = idUsuario;
+                csr.nick = usuario.usuario_nick_usuario;
+                
+            }
+            return csr;
+        }
+        //Obtiene el codigo de la comuna
+        public static int codComuna(string nomComuna)
+        {
+            var codComuna = 0;
+            using(var mt = new myticketEntities())
+            {
+                var lst = (from d in mt.mt_tab_comuna
+                           where (d.comuna_nom_comuna == nomComuna)
+                           select d).ToList();
+                foreach (var item in lst)
+                {
+                    codComuna = (int) item.comuna_cod_comuna;
+                }
+            }
+            return codComuna;
+        }
+        //Obtiene el codigo de la direccion
+        public static int codDireccion()
+        {
+            var codDir = 0;
+            using (var myTicket = new myticketEntities())
+            {
+                var lst = (from d in myTicket.mt_tab_direccion
+                           select d);
+                foreach (var item in lst)
+                {
+                    codDir = Convert.ToInt32(item.direccion_cod_direccion);
+                }
 
                 
-
+            }
+            return codDir;
+        }
+        //Ingresar usuario
+        public static void ingresarUsuario(MUsuario mUser)
+        {
+            using(var mt = new myticketEntities())
+            {
+                var mtUsuario = new mt_tab_usuario
+                {
+                    usuario_cod_area = mUser.codArea,
+                    usuario_cod_estado = mUser.codEstado,
+                    usuario_cod_persona = mUser.codPersona,
+                    usuario_nick_usuario = mUser.nick,
+                    usuario_cod_password = mUser.pass
+                };
+                mt.mt_tab_usuario.Add(mtUsuario);
+                mt.SaveChanges();
+            }
+        }
+        //Ingresar rol usuario
+        public static void ingresarRolUsua(MRolUsuario mRolUsu)
+        {
+            using(var mt = new myticketEntities())
+            {
+                var mtRolUsua = new mt_tab_rolusua
+                {
+                    rol_cod_rol = mRolUsu.codRol,
+                    usuario_cod_usuario = mRolUsu.codUsuario,
+                    rolusua_fec_fin = mRolUsu.fechaFin,
+                    rolusua_fec_ini = mRolUsu.fechaInicio
+                };
+                mt.mt_tab_rolusua.Add(mtRolUsua);
+                mt.SaveChanges();
+            }
+        }
+        //Ingresar direccion
+        public static void ingresarDireccion(MDireccion dir)
+        {
+            using (var myticket = new myticketEntities())
+            {
+                var mtDir = new mt_tab_direccion
+                {
+                    comuna_cod_comuna = dir.CodComuna,
+                    direccion_dsc_direccion = dir.DescCasa,
+                    direccion_num_direccion = dir.NumCasa
+                };
                 myticket.mt_tab_direccion.Add(mtDir);
+                myticket.SaveChanges();
+            }
+        }
+        //Ingresar persona
+        public static void ingresarPersona(MPersona per)
+        {
+
+            using (myticketEntities myticket = new myticketEntities())
+            {
+                var mtPer = new mt_tab_persona
+                {
+
+                    persona_cod_persona = per.CodPersona,
+                    persona_dsc_apmaterno = per.AppMaterno,
+                    persona_dsc_appaterno = per.AppPaterno,
+                    persona_dsc_nombre = per.nombre,
+                    persona_fec_nacimiento = per.Fnac,
+                    persona_num_celular = per.Celular,
+                    persona_num_fono = per.Fono,
+                    persona_num_rut = per.Rut,
+                    persona_num_dv = per.DV,
+                    direccion_cod_direccion = per.CodDireccion
+                };
+
                 myticket.mt_tab_persona.Add(mtPer);
                 myticket.SaveChanges();
-
             }
 
 
         }
+        //Ingresa tickets
+        public static void ingresarTicket(MTicket ticket)
+        {
+            using (var myTickets = new myticketEntities())
+            {
+                var fecha = DateTime.Now;
+                var mtTickets = new mt_tab_ticket
+                {
+                    ticket_cod_gravedad = ticket.codGravedad,
+                    ticket_cod_ticket = ticket.codTicket,
+                    ticket_cod_per = ticket.codPersona,
+                    ticket_cod_tipoatencion = ticket.codTipoAtencion,
+                    ticket_est_ticket = ticket.codEstadoTicket,
+                    ticket_es_masivo = ticket.esMasivo,
+                    ticket_dsc_asunto = ticket.descAsunto,
+                    ticket_dsc_detalle = ticket.detalleTicket,
+                    ticket_fec_creacion = fecha,
+                    ticket_fec_respuesta = fecha.AddDays(8),
+                    ticket_fec_vencimiento = fecha.AddDays(16),
+                    ticket_cod_usuaingreso = 1,
+                    ticket_cod_usuaresponde = 1
+                };
+                myTickets.mt_tab_ticket.Add(mtTickets);
+                myTickets.SaveChanges();
+            }
+        }
 
+
+
+        //Metodos sin uso
         public Boolean autenticar5()
         {
             var log = false;
@@ -351,6 +530,29 @@ namespace MyTicketAdmin.Controllers
             }
             return log;
 
+        }
+
+        public Boolean agregar(int cod)
+        {
+
+            var log = false;
+            con.Open();
+
+            comandos = new NpgsqlCommand
+            {
+                Connection = con,
+                CommandText = "INSERT INTO mt_tab_region VALUES (@cod,'BIO BIO','15/07/2017','18/10/2018')",
+                CommandType = System.Data.CommandType.Text
+
+            };
+            comandos.Parameters.AddWithValue("@cod", cod);
+            var resultOk = comandos.ExecuteNonQuery();
+            if (resultOk > 0)
+            {
+                mensaje = "Agregado";
+            }
+            con.Close();
+            return log;
         }
 
     }

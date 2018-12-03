@@ -91,6 +91,7 @@
           <Property Name="ticket_fec_vencimiento" Type="timestamp" />
           <Property Name="ticket_cod_gravedad" Type="int8" />
           <Property Name="usuarioasig_cod_usuarioasign" Type="int8" />
+          <Property Name="ticket_cod_per" Type="int8" Nullable="false" />
         </EntityType>
         <EntityType Name="mt_tab_usuario">
           <Key>
@@ -344,6 +345,7 @@
           <Property Name="ticket_fec_vencimiento" Type="DateTime" Precision="6" />
           <Property Name="ticket_cod_gravedad" Type="Int64" />
           <Property Name="usuarioasig_cod_usuarioasign" Type="Int64" />
+          <Property Name="ticket_cod_per" Type="Int64" Nullable="false" />
         </EntityType>
         <EntityType Name="mt_tab_usuario">
           <Key>
@@ -524,6 +526,7 @@
           <EntitySetMapping Name="mt_tab_ticket">
             <EntityTypeMapping TypeName="myticketModel.mt_tab_ticket">
               <MappingFragment StoreEntitySet="mt_tab_ticket">
+                <ScalarProperty Name="ticket_cod_per" ColumnName="ticket_cod_per" />
                 <ScalarProperty Name="usuarioasig_cod_usuarioasign" ColumnName="usuarioasig_cod_usuarioasign" />
                 <ScalarProperty Name="ticket_cod_gravedad" ColumnName="ticket_cod_gravedad" />
                 <ScalarProperty Name="ticket_fec_vencimiento" ColumnName="ticket_fec_vencimiento" />

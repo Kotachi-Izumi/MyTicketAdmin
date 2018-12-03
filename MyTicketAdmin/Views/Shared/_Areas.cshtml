@@ -1,0 +1,27 @@
+﻿@{
+    var areas = MyTicketAdmin.Controllers.ConPG.areas();
+
+}
+<table>
+    <thead>
+        <tr>
+            <th>Codigo de area</th>
+            <th>Area</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in areas)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(area => item.Key)</td>
+                    <td>@Html.DisplayFor(area => item.Value)</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+
+

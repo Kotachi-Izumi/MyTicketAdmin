@@ -1,0 +1,23 @@
+﻿@model MyTicketAdmin.Models.DatosObj.MRolUsuario
+    @{ 
+        var roles = MyTicketAdmin.Controllers.ConPG.roles();
+
+    }
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.codRol,"Codigo Rol")
+    @Html.TextBoxFor(model => model.codRol)
+
+    @Html.LabelFor(model => model.codUsuario, "Codigo Usuario")
+    @Html.TextBoxFor(model => model.codUsuario)
+
+    @Html.LabelFor(model => model.fechaInicio, "Fecha Inicio")
+    @Html.EditorFor(model => model.fechaInicio,"date")
+
+    @Html.LabelFor(model => model.fechaFin, "Fecha Fin")
+    @Html.EditorFor(model => model.fechaFin,"date")
+}
+<div>
+    @Html.Partial("~//Views//Shared//_Roles.cshtml")
+</div>

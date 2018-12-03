@@ -1,44 +1,39 @@
 ﻿@model MyTicketAdmin.Models.DatosObj.MPersona
 
-<!DOCTYPE html>
-<html>
 
-<head>
+@using (Html.BeginForm("guardarPersona","Register",FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(Model => Model.nombre,"Nombre")
+        @Html.TextBoxFor(Model => Model.nombre)
 
-</head>
+        @Html.LabelFor(model => model.AppPaterno,"Primer Apellido")
+        @Html.TextBoxFor(model => model.AppPaterno)
 
-<body>
-    @using (Html.BeginForm())
-    {
-        Html.LabelFor(model => model.nombre);
-        Html.TextBoxFor(model => model.nombre);
+        @Html.LabelFor(model => model.AppMaterno,"Segundo Apellido")
+        @Html.TextBoxFor(model => model.AppMaterno)
 
-        Html.LabelFor(model => model.AppPaterno);
-        Html.TextBoxFor(model => model.AppPaterno);
+        @Html.LabelFor(model => model.Rut,"Rut")
+        @Html.TextBoxFor(model => model.Rut)
 
-        Html.LabelFor(model => model.AppMaterno);
-        Html.TextBoxFor(model => model.AppMaterno);
+        @Html.LabelFor(model => model.DV,"Digito Verificador")
+        @Html.TextBoxFor(model => model.DV)
 
-        Html.LabelFor(model => model.Rut);
-        Html.TextBoxFor(model => model.Rut);
+        @Html.LabelFor(model => model.Fnac,"Fecha Nacimiento")
+        @Html.EditorFor(model => model.Fnac,"date")
 
-        Html.LabelFor(model => model.DV);
-        Html.TextBoxFor(model => model.DV);
+        @Html.LabelFor(model => model.Fono,"Telefono Fijo")
+        @Html.EditorFor(model => model.Fono, "tel")
 
-        Html.LabelFor(model => model.Fnac);
-        Html.EditorFor(model => model.Fnac);
+        @Html.LabelFor(model => model.Celular,"Celular")
+        @Html.EditorFor(model => model.Celular,"tel")
 
-        Html.LabelFor(model => model.Fono);
-        Html.TextBoxFor(model => model.Fono);
-
-        Html.LabelFor(model => model.Celular);
-        Html.TextBoxFor(model => model.Celular);
-
-        Html.LabelFor(model => model.Mail);
-        Html.EditorFor(model => model.Mail);
+        @Html.LabelFor(model => model.Mail,"Email")
+        @Html.EditorFor(model => model.Mail,"email")
 
         
-        <input type="submit" value="Enviar"/>
-    }
-</body>
-</html>
+        <input type="submit" value="Enviar" />
+    </div>
+    
+    
+}

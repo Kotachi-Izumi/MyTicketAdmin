@@ -1,7 +1,7 @@
 ﻿
 @{
     Layout = null;
-    var a = "";
+    
 }
 
 <!DOCTYPE html>
@@ -22,8 +22,12 @@
             <h1><Strong>Menu</Strong></h1>
             
             <ul>
-                <li> <a href="../Register/IngresoPersona" " target="ifInfo">Ingresar persona</a></li>
-                <li>@Html.ActionLink("Registrar usuario","Registro","Register")</li>
+                <li> <a href="../Register/IngresoPersona"  target="ifInfo">xxxxIngresar persona</a></li>
+                <li>@Html.ActionLink("Ingresar persona","IngresoPersona","Register")</li>
+                <li>@Html.ActionLink("Ingresar Direccion", "IngresoDireccion", "Register")</li>
+                <li>@Html.ActionLink("Registrar usuario","IngresoUsuario","Register")</li>
+                <li>@Html.ActionLink("Registrar Rol Usuario","IngresoRolUsua","Register")</li>
+                <li>@Html.ActionLink("Tickets","Index","Tickets")</li>
                 <li>Eliminacion usuario</li>
                 <li>Modificacion usuario</li>
                 <li><a href="../Register/AsigRol" target="ifInfo">Asignacion de rol</a></li>
@@ -33,15 +37,14 @@
             </ul>
         </aside> 
         <div id="cuerpoInfo" name="cuerpoInfo">
-            @Html.Partial("IngresoPersona");
             <iframe id="ifInfo" name="ifInfo"></iframe>
         </div>
     </div>
     <div>
-        @{
+        
             <input type="button" value="Enviar" id="btnMail" name="btnMail" onclick="@Url.Action("btnMail", "//Principal");" />
             
-        }
+        
         
     </div>
 </body>

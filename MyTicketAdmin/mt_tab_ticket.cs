@@ -27,5 +27,6 @@ namespace MyTicketAdmin
         public Nullable<System.DateTime> ticket_fec_vencimiento { get; set; }
         public Nullable<long> ticket_cod_gravedad { get; set; }
         public Nullable<long> usuarioasig_cod_usuarioasign { get; set; }
+        public long ticket_cod_per { get; set; }
     }
 }

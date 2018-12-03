@@ -1,0 +1,55 @@
+﻿@model MyTicketAdmin.Models.DatosObj.MTicket
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>editarTicket</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm())
+        {
+            @Html.LabelFor(model => model.codPersona, "Codigo Persona")
+            @Html.EditorFor(model => model.codPersona)
+
+            @Html.LabelFor(model => model.codEstadoTicket,"Estado Ticket")
+            @Html.EditorFor(model => model.codEstadoTicket)
+
+            @Html.LabelFor(model => model.codGravedad,"Codigo Gravedad")
+            @Html.EditorFor(model => model.codGravedad)
+
+            @Html.LabelFor(model => model.codTipoAtencion,"Tipo Atencion")
+            @Html.EditorFor(model => model.codTipoAtencion)
+
+            @Html.LabelFor(model => model.codUsuarioAsignado,"Usuario Asignado")
+            @Html.EditorFor(model => model.codUsuarioAsignado)
+
+            @Html.LabelFor(model => model.codUsuarioResponde,"Usuario Responde")
+            @Html.EditorFor(model => model.codUsuarioResponde)
+
+            @Html.LabelFor(model => model.descAsunto,"Asunto")
+            @Html.EditorFor(model => model.descAsunto)
+
+            @Html.LabelFor(model => model.detalleTicket,"Descripcion Problema")
+            @Html.TextAreaFor(model => model.detalleTicket)
+
+            @Html.LabelFor(model => model.esMasivo,"Es masivo")
+            @Html.EditorFor(model => model.esMasivo,"checkbox")
+
+            @Html.LabelFor(model => model.fechaRespuesta,"Fecha Respuesta")
+            @Html.EditorFor(model => model.fechaRespuesta,"date")
+
+            @Html.LabelFor(model => model.fechaVencimiento, "Fecha Vencimiento")
+            @Html.EditorFor(model => model.fechaVencimiento,"date")
+
+            <input type="submit" value="Editar" id="edtTicket" name="edtTicket" />
+        }
+    </div>
+    @Html.ActionLink("Regresar","Index")
+</body>
+</html>

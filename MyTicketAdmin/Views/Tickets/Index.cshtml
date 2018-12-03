@@ -1,6 +1,9 @@
-﻿@model IEnumerable<MyTicketAdmin.mt_tab_ticket>
+﻿@model MyTicketAdmin.Models.DatosObj.MCliente
+
+
 @{ 
     Layout = null;
+    var cook = 0;
 }
 
 <!DOCTYPE html>
@@ -11,6 +14,31 @@
     <title>Index</title>
 </head>
 <body>
+    <div>
+        @using (Html.BeginForm("Index","Tickets",FormMethod.Post))
+        {
+           <label for="busqIdCliente">Ingrese Id Cliente</label>
+           <input type="number" id="busqIdCliente" name="busqIdCliente" placeholder="Id Cliente" required />
+           
+           <input type="submit" value="Buscar" id="buscarTCliente" name="buscarTCliente" />
+        }
+    </div>
+    <div>
+        
+        @Html.DisplayFor(model => model.codPersona)
+        @Html.DisplayFor(model => model.nombre)
+        @Html.DisplayFor(model => model.apPaterno)
+        @Html.DisplayFor(model => model.apMaterno)
+        @Html.DisplayFor(model => model.email)
+        @Html.DisplayFor(model => model.fono)
+        @Html.DisplayFor(model => model.cel)
+    </div>
+    <div>
+        @if (Model != null)
+        {
+            @Html.ActionLink("Nuevo Ticket", "nuevoTicket", "Tickets")
+        }
+           </div>
     <div> 
         <table>
             <thead>
@@ -28,25 +56,12 @@
                     </tr>
             </thead>
             <tbody>
-                @foreach(var tickets in Model)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(model => tickets.ticket_est_ticket)</td>
-                        <td>@Html.DisplayFor(model => tickets.ticket_cod_gravedad)</td>
-                        <td>@Html.DisplayFor(model => tickets.ticket_cod_ticket)</td>
-                        <td>@Html.DisplayFor(model => tickets.ticket_cod_tipoatencion)</td>
-                        <td>@Html.DisplayFor(model => tickets.ticket_cod_usuaingreso)</td>
-                        <td>@Html.DisplayFor(model => tickets.ticket_dsc_detalle)</td>
-                        <td>@Html.DisplayFor(model => tickets.ticket_dsc_asunto)</td>
-                        <td>@Html.DisplayFor(model => tickets.ticket_es_masivo)</td>
-                        <td>@Html.DisplayFor(model => tickets.ticket_fec_respuesta)</td>
-                        <td>@Html.DisplayFor(model => tickets.ticket_fec_vencimiento)</td>
-                    </tr>
-                }
+               
             </tbody>
         </table>
 
        
     </div>
+    @Html.ActionLink("Principal","Principal","Principal")
 </body>
 </html>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Net.Mail;
 using System.Net;
-
+using System.Web.Mvc;
 
 namespace MyTicketAdmin.Models.DatosObj
 {
@@ -31,9 +31,9 @@ namespace MyTicketAdmin.Models.DatosObj
                         smtp.Send(email);
                         envioCorrecto = true;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
-
+                        
                         throw;
                     }
                 }

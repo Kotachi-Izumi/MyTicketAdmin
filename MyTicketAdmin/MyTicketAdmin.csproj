@@ -149,7 +149,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\App_Start\RouteConfig.cs" />
     <Compile Include="BDMyTicket.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -169,18 +169,23 @@
     <Compile Include="Controllers\PrincipalController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
+    <Compile Include="Controllers\UpdateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ConPG.cs" />
     <Compile Include="Models\DatosObj\EnvioMail.cs" />
     <Compile Include="Models\DatosObj\MAreas.cs" />
+    <Compile Include="Models\DatosObj\MCliente.cs" />
     <Compile Include="Models\DatosObj\MComuna.cs" />
+    <Compile Include="Models\DatosObj\MCSR.cs" />
     <Compile Include="Models\DatosObj\MDireccion.cs" />
     <Compile Include="Models\DatosObj\MPersona.cs" />
     <Compile Include="Models\DatosObj\MRegion.cs" />
     <Compile Include="Models\DatosObj\MRol.cs" />
+    <Compile Include="Models\DatosObj\MRolUsuario.cs" />
     <Compile Include="Models\DatosObj\MTicket.cs" />
+    <Compile Include="Models\DatosObj\MUsuario.cs" />
     <Compile Include="mt_tab_areas.cs">
       <DependentUpon>BDMyTicket.tt</DependentUpon>
     </Compile>
@@ -228,9 +233,18 @@
     <Content Include="BDMyTicket.edmx.diagram">
       <DependentUpon>BDMyTicket.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Shared\IngresoPersona.cshtml" />
     <Content Include="Views\Register\IngresoPersona.cshtml" />
     <Content Include="Views\Tickets\Index.cshtml" />
+    <Content Include="Views\Register\IngresoDireccion.cshtml" />
+    <Content Include="Views\Register\_IngresoUsuario.cshtml" />
+    <Content Include="Views\Register\_IngresoRolUsua.cshtml" />
+    <Content Include="Views\Shared\_Roles.cshtml" />
+    <Content Include="Views\Shared\_Areas.cshtml" />
+    <Content Include="Views\Tickets\nuevoTicket.cshtml" />
+    <Content Include="Views\Tickets\editarTicket.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Register\IngresoUsuario.cshtml" />
+    <Content Include="Views\Register\IngresoRolUsua.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -240,6 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Update\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
