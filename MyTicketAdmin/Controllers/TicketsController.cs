@@ -10,6 +10,7 @@ namespace MyTicketAdmin.Controllers
     public class TicketsController : Controller
     {                        
         private myticketEntities bd = new myticketEntities();
+        
         // GET: Tickets
         public ActionResult Index()
         {
@@ -34,14 +35,18 @@ namespace MyTicketAdmin.Controllers
         {          
                 return View();            
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult guardarTicket(MTicket tick)
         {
             ConPG.ingresarTicket(tick);
             return View("~\\Views\\Tickets\\Index.cshtml");
         }
-        public ActionResult editarTicket(string id)
+        
+        
+        public ActionResult editarTicket(int? id)
         {
-            if (id == null || id == "")
+            if (id == null || id.Equals(string.Empty))
             {
                 return View("~\\Views\\Tickets\\Index.cshtml");
             }
@@ -50,9 +55,30 @@ namespace MyTicketAdmin.Controllers
             {
                 return View("~\\Views\\Tickets\\Index.cshtml");
             }
-
-            return View(tickets);
+            var TICK = ConPG.editTicket(tickets);
+            return View(TICK);
             
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult editarTicket(MTicket tickets)
+        {
+             var pg = new ConPG();
+            if(pg.updateTicket(tickets) > 0)
+            {
+                return View("~\\Views\\Tickets\\Index.cshtml");
+            }
+            /*var ticket = ConPG.editTicket(tickets);
+            var tick = bd.mt_tab_ticket.Find(tickets.codTicket);
+            tick = ticket;
+            if (ModelState.IsValid)
+            {
+                //bd.Entry(tick).State = System.Data.Entity.EntityState.Modified;
+                bd.SaveChanges();
+                return View("~\\Views\\Tickets\\Index.cshtml");
+            }*/
+            return View();
+        }
+        
     }
 }

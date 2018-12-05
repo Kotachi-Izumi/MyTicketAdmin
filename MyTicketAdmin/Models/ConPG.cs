@@ -5,6 +5,7 @@ using NpgsqlTypes;
 using System.Linq;
 using MyTicketAdmin.Models.DatosObj;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace MyTicketAdmin.Controllers
 {
@@ -37,9 +38,9 @@ namespace MyTicketAdmin.Controllers
         }
 
         //Verifica si el usuario y el password ingresado esta registrado
-        public static bool autenticar(string user, string pass)
+        public static int autenticar(string user, string pass)
         {
-            var log = false;
+            var log = 0;
 
             using (myticketEntities myTicket = new myticketEntities())
             {
@@ -48,13 +49,33 @@ namespace MyTicketAdmin.Controllers
                            select d).ToList();
                 if(lst.Count > 0)
                 {
-                    log = true;
+                    foreach (var item in lst)
+                    {
+                       log = (int) item.usuario_cod_usuario;
+                    }
                 }
                     }
 
             return log;
         }
 
+        //Obtiene el codigo de rol de usuario
+        public static int rolUsuario(int codUsuario)
+        {
+            var rol = 0;
+            using(var myticket = new myticketEntities())
+            {
+                var lst = (from d in myticket.mt_tab_rolusua
+                           where (d.usuario_cod_usuario == codUsuario)
+                           select d).ToList();
+                foreach (var item in lst)
+                {
+                    rol = (int)item.rol_cod_rol;
+                }
+             
+            }
+            return rol;
+        }
         //Obtiene la lista de comunas
         public static List<String> comunas()
         {
@@ -303,7 +324,77 @@ namespace MyTicketAdmin.Controllers
             }
         }
 
+        public static List<mt_tab_ticket> Tickets(int id)
+        {
+            var ticket = new List<mt_tab_ticket>();
+            using(var bd = new myticketEntities())
+            {
+                var lst = (from d in bd.mt_tab_ticket
+                           orderby d.ticket_cod_ticket
+                           where d.ticket_cod_per == id
+                           select d).ToList();
+                    ticket = lst;
+            }
+            return ticket;
 
+        }
+        public static mt_tab_ticket editTicket(MTicket ticket)
+        {
+        
+                var mtTickets = new mt_tab_ticket
+                {
+                    ticket_cod_gravedad = ticket.codGravedad,
+                    ticket_cod_ticket = ticket.codTicket,
+                    ticket_cod_per = ticket.codPersona,
+                    ticket_cod_tipoatencion = ticket.codTipoAtencion,
+                    ticket_est_ticket = ticket.codEstadoTicket,
+                    ticket_es_masivo = ticket.esMasivo,
+                    ticket_dsc_asunto = ticket.descAsunto,
+                    ticket_dsc_detalle = ticket.detalleTicket,
+                    ticket_fec_respuesta = ticket.fechaRespuesta,
+                    ticket_fec_vencimiento = ticket.fechaVencimiento,
+                    ticket_cod_usuaingreso = ticket.codUsuarioIngreso,
+                    ticket_cod_usuaresponde = ticket.codUsuarioResponde
+                };
+            return mtTickets;
+        }
+
+        public static MTicket editTicket(mt_tab_ticket ticket)
+        {
+
+            var mtTickets = new MTicket
+            {
+                codGravedad = (int)ticket.ticket_cod_gravedad,
+                codTicket = (int)ticket.ticket_cod_ticket,
+                codPersona = ticket.ticket_cod_per,
+                codTipoAtencion = (int)ticket.ticket_cod_tipoatencion,
+                codEstadoTicket = (int)ticket.ticket_est_ticket,
+                esMasivo = (bool)ticket.ticket_es_masivo,
+                descAsunto = ticket.ticket_dsc_asunto,
+                detalleTicket = ticket.ticket_dsc_detalle,
+                fechaRespuesta = (DateTime)ticket.ticket_fec_respuesta,
+                fechaVencimiento = (DateTime)ticket.ticket_fec_vencimiento,
+                codUsuarioIngreso = (int)ticket.ticket_cod_usuaingreso,
+                codUsuarioResponde = (int)ticket.ticket_cod_usuaresponde
+            };
+            return mtTickets;
+        }
+
+        public int updateTicket(MTicket ticket)
+        {
+            var query = "UPDATE mt_tab_ticket SET  ticket_fec_respuesta ='"+ticket.fechaRespuesta+"', ticket_cod_usuaresponde ='"+ticket.codUsuarioResponde+"',"
+                +"ticket_dsc_detalle = '"+ticket.detalleTicket+"', ticket_es_masivo = '"+ticket.esMasivo+"',ticket_dsc_asunto = '"+ticket.descAsunto+"',ticket_est_ticket = '"+ticket.codEstadoTicket+"',ticket_fec_vencimiento = '"+ticket.fechaVencimiento+"',"+
+                "ticket_cod_gravedad = '"+ticket.codGravedad+"', usuarioasig_cod_usuarioasign = '"+ticket.codUsuarioAsignado+"',ticket_cod_tipoatencion ='"+ticket.codTipoAtencion+"'";
+            using(var com = new NpgsqlCommand(query))
+            {
+                abrirConexion();
+                com.Connection = con;
+                com.CommandType = CommandType.Text;
+                var result = com.ExecuteNonQuery();
+                cerrarConexion();
+                return result;
+            }
+        }
 
         //Metodos sin uso
         public Boolean autenticar5()

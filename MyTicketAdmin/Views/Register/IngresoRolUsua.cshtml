@@ -15,11 +15,14 @@
     <div> 
         @using (Html.BeginForm("asignarRol","Register",FormMethod.Post))
         {
+            @Html.AntiForgeryToken()
             @Html.LabelFor(model => model.codRol, "Codigo Rol")
             @Html.TextBoxFor(model => model.codRol)
+            @Html.ValidationMessageFor(model => model.codRol)
 
             @Html.LabelFor(model => model.codUsuario, "Codigo Usuario")
             @Html.TextBoxFor(model => model.codUsuario)
+            @Html.ValidationMessageFor(model => model.codUsuario)
 
             @Html.LabelFor(model => model.fechaInicio, "Fecha Inicio")
             @Html.EditorFor(model => model.fechaInicio, "date")

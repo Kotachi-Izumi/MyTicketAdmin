@@ -12,28 +12,35 @@
 </head>
 <body>
     <div> 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("guardarTicket","Tickets",FormMethod.Post))
         {
+            @Html.AntiForgeryToken()
             @Html.LabelFor(model => model.codEstadoTicket,"Estado Ticket")
             @Html.EditorFor(model => model.codEstadoTicket)
+            @Html.ValidationMessageFor(model => model.codEstadoTicket)
 
             @Html.LabelFor(model => model.codGravedad,"Codigo Gravedad")
             @Html.EditorFor(model => model.codGravedad)
+            @Html.ValidationMessageFor(model => model.codGravedad)
 
             @Html.LabelFor(model => model.codPersona,"Codigo Persona")
             @Html.EditorFor(model => model.codPersona)
+            @Html.ValidationMessageFor(model => model.codPersona)
 
             @Html.LabelFor(model => model.codTicket,"Codigo Ticket")
             @Html.EditorFor(model => model.codTicket)
 
             @Html.LabelFor(model => model.codTipoAtencion,"Tipo Atencion")
             @Html.EditorFor(model => model.codTipoAtencion)
+            @Html.ValidationMessageFor(model => model.codTipoAtencion)
 
             @Html.LabelFor(model => model.descAsunto,"Asunto")
             @Html.EditorFor(model => model.descAsunto)
+            @Html.ValidationMessageFor(model => model.descAsunto)
 
             @Html.LabelFor(model => model.detalleTicket,"Descripcion Problema")
             @Html.TextAreaFor(model => model.detalleTicket)
+            @Html.ValidationMessageFor(model => model.detalleTicket)
 
             @Html.LabelFor(model => model.esMasivo)
             @Html.EditorFor(model => model.esMasivo,"checkbox")

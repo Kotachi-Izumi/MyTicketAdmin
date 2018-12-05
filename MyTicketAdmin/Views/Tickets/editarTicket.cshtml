@@ -14,29 +14,38 @@
     <div> 
         @using (Html.BeginForm())
         {
-            @Html.LabelFor(model => model.codPersona, "Codigo Persona")
-            @Html.EditorFor(model => model.codPersona)
+            @Html.AntiForgeryToken()
+
+            @Html.DisplayFor(model => model.codPersona)
+            @Html.DisplayFor(model => model.codTicket)
+            <br />
 
             @Html.LabelFor(model => model.codEstadoTicket,"Estado Ticket")
             @Html.EditorFor(model => model.codEstadoTicket)
+            @Html.ValidationMessageFor(model => model.codEstadoTicket)
 
             @Html.LabelFor(model => model.codGravedad,"Codigo Gravedad")
             @Html.EditorFor(model => model.codGravedad)
+            @Html.ValidationMessageFor(model => model.codGravedad)
 
             @Html.LabelFor(model => model.codTipoAtencion,"Tipo Atencion")
             @Html.EditorFor(model => model.codTipoAtencion)
+            @Html.ValidationMessageFor(model => model.codTipoAtencion)
 
             @Html.LabelFor(model => model.codUsuarioAsignado,"Usuario Asignado")
             @Html.EditorFor(model => model.codUsuarioAsignado)
+            
 
             @Html.LabelFor(model => model.codUsuarioResponde,"Usuario Responde")
             @Html.EditorFor(model => model.codUsuarioResponde)
 
             @Html.LabelFor(model => model.descAsunto,"Asunto")
             @Html.EditorFor(model => model.descAsunto)
+            @Html.ValidationMessageFor(model => model.descAsunto)
 
             @Html.LabelFor(model => model.detalleTicket,"Descripcion Problema")
             @Html.TextAreaFor(model => model.detalleTicket)
+            @Html.ValidationMessageFor(model => model.detalleTicket)
 
             @Html.LabelFor(model => model.esMasivo,"Es masivo")
             @Html.EditorFor(model => model.esMasivo,"checkbox")

@@ -1,9 +1,14 @@
 ﻿@model MyTicketAdmin.Models.DatosObj.MCliente
 
 
-@{ 
+@{
     Layout = null;
-    var cook = 0;
+    var tickets = new List<mt_tab_ticket>();
+    if (Model != null)
+    {
+        tickets = MyTicketAdmin.Controllers.ConPG.Tickets(Model.codPersona);
+    }
+
 }
 
 <!DOCTYPE html>
@@ -36,10 +41,13 @@
     <div>
         @if (Model != null)
         {
+           
             @Html.ActionLink("Nuevo Ticket", "nuevoTicket", "Tickets")
+           
         }
            </div>
     <div> 
+       @if(Model != null) { 
         <table>
             <thead>
                     <tr>
@@ -48,7 +56,7 @@
                         <th>Codigo Ticket</th>
                         <th>Tipo Atencion</th>
                         <th>Usuario Ingreso</th>
-                        <th>Descripcion </th>
+                        <th>Asunto </th>
                         <th>Detalle Ticket</th>
                         <th>Es Masivo</th>
                         <th>Fecha Respuesta</th>
@@ -56,11 +64,48 @@
                     </tr>
             </thead>
             <tbody>
-               
+               @foreach (var item in tickets)
+               {
+                   <tr>
+                       <td>
+                           @item.ticket_est_ticket
+                       </td>
+                       <td>
+                           @item.ticket_cod_gravedad
+                       </td>
+                       <td>
+                           @item.ticket_cod_ticket
+                       </td>
+                       <td>
+                           @item.ticket_cod_tipoatencion
+                       </td>
+                       <td>
+                           @item.ticket_cod_usuaingreso
+                       </td>
+                       <td>
+                           @item.ticket_dsc_asunto
+                       </td>
+                       <td>
+                           @item.ticket_dsc_detalle
+                       </td>
+                       <td>
+                           @item.ticket_es_masivo
+                       </td>
+                       <td>
+                           @item.ticket_fec_respuesta
+                       </td>
+                       <td>
+                           @item.ticket_fec_vencimiento
+                       </td>
+                       <td>
+                           @Html.ActionLink("Editar", "editarTicket", new { id = item.ticket_cod_ticket })
+                       </td>
+                   </tr>
+               }
             </tbody>
         </table>
+       }
 
-       
     </div>
     @Html.ActionLink("Principal","Principal","Principal")
 </body>

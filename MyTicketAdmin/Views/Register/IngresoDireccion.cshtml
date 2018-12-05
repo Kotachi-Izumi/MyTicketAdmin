@@ -3,16 +3,20 @@
     var comunas = MyTicketAdmin.Controllers.ConPG.comunas();
     var regiones = MyTicketAdmin.Controllers.ConPG.regiones();
 
-    
+
 }   
  
-@using (Html.BeginForm("guardarDireccion","Register",FormMethod.Post) ) {
-   
-     @Html.LabelFor(Model => Model.DescCasa,"Direccion")
+@using (Html.BeginForm("guardarDireccion", "Register", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+     @Html.LabelFor(Model => Model.DescCasa, "Direccion")
      @Html.TextBoxFor(Model => Model.DescCasa)
-    @Html.LabelFor(Model => Model.NumCasa,"No casa")
+    @Html.ValidationMessageFor(model => model.DescCasa)
+
+    @Html.LabelFor(Model => Model.NumCasa, "No casa")
     @Html.TextBoxFor(Model => Model.NumCasa)
-    
+    @Html.ValidationMessageFor(model => model.NumCasa)
 
     <select id="regiones" name="regiones">
         @foreach (var reg in regiones)

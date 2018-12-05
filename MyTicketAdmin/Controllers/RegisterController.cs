@@ -26,6 +26,7 @@ namespace MyTicketAdmin.Controllers
             return View("~\\Views\\Register\\AsigRol.cshtml");
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult guardarPersona(MPersona per)
         {
             
@@ -46,6 +47,7 @@ namespace MyTicketAdmin.Controllers
             return PartialView("~\\Views\\Register\\IngresoDireccion.cshtml",dir1);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult guardarDireccion(MDireccion dir)
         {
             nomComuna = Request.Form["comunas"].ToString();
@@ -61,6 +63,7 @@ namespace MyTicketAdmin.Controllers
             return PartialView(usuario);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult guardarUsuario(MUsuario user)
         {
             if(user != null)
@@ -82,6 +85,7 @@ namespace MyTicketAdmin.Controllers
             return PartialView(mRolUsua);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult asignarRol(MRolUsuario rolUsu)
         {
             if(rolUsu != null)

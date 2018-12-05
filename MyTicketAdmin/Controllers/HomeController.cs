@@ -24,17 +24,25 @@ namespace MyTicketAdmin.Controllers
             var user = Request.Form["inUsuario"].ToString();
             var pass = Request.Form["inpPass"].ToString();
             var con = new ConPG();
+            var rol = ConPG.rolUsuario(ConPG.autenticar(user, pass));
             //con.ingresarPersona(per, dir);
-            if (ConPG.autenticar(user, pass))
+            if (rol == 1)
             {
                 //FormsAuthentication.RedirectFromLoginPage(user, false)
                 return View("~\\Views\\Principal\\Principal.cshtml");
-                
-            }
-            else
+
+            }else
             {
-                return View("~\\Views\\Home\\Index.cshtml");
-            }       
+                if (rol == 3 || rol == 4)
+                {
+                    return View("~\\Views\\Tickets\\Index.cshtml");
+                }
+                else
+                {
+                    return View("~\\Views\\Home\\Index.cshtml");
+                }
+            }
+                   
         }
 
         public ActionResult linkRegistro()
