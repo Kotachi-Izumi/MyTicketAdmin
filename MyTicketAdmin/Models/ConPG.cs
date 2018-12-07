@@ -323,7 +323,7 @@ namespace MyTicketAdmin.Controllers
                 myTickets.SaveChanges();
             }
         }
-
+        //Obtiene los tickets
         public static List<mt_tab_ticket> Tickets(int id)
         {
             var ticket = new List<mt_tab_ticket>();
@@ -338,6 +338,7 @@ namespace MyTicketAdmin.Controllers
             return ticket;
 
         }
+        //Convierte un modelo de tickets en entidad para bd
         public static mt_tab_ticket editTicket(MTicket ticket)
         {
         
@@ -358,7 +359,7 @@ namespace MyTicketAdmin.Controllers
                 };
             return mtTickets;
         }
-
+        //Convierte entidad de BD en modelo
         public static MTicket editTicket(mt_tab_ticket ticket)
         {
 
@@ -379,7 +380,7 @@ namespace MyTicketAdmin.Controllers
             };
             return mtTickets;
         }
-
+        //Actualiza o modifica los tickets
         public int updateTicket(MTicket ticket)
         {
             var query = "UPDATE mt_tab_ticket SET  ticket_fec_respuesta ='"+ticket.fechaRespuesta+"', ticket_cod_usuaresponde ='"+ticket.codUsuarioResponde+"',"
