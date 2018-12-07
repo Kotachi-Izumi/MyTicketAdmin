@@ -9,32 +9,78 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>IngresoRolUsua</title>
+    <title>Ingreso Rol Usuario</title>
+    <link href="~/Contenido/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-reboot.min.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="~/Contenido/bootstrap.bundle.js"></script>
+    <script src="~/Contenido/bootstrap.bundle.min.js"></script>
+    <link href="~/Contenido/bootstrap.css" rel="stylesheet" />
+    <script src="~/Contenido/bootstrap.js"></script>
+    <link href="~/Contenido/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Contenido/bootstrap.min.js"></script>
+
 </head>
-<body>
-    <div> 
-        @using (Html.BeginForm("asignarRol","Register",FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            @Html.LabelFor(model => model.codRol, "Codigo Rol")
-            @Html.TextBoxFor(model => model.codRol)
-            @Html.ValidationMessageFor(model => model.codRol)
-
-            @Html.LabelFor(model => model.codUsuario, "Codigo Usuario")
-            @Html.TextBoxFor(model => model.codUsuario)
-            @Html.ValidationMessageFor(model => model.codUsuario)
-
-            @Html.LabelFor(model => model.fechaInicio, "Fecha Inicio")
-            @Html.EditorFor(model => model.fechaInicio, "date")
-
-            @Html.LabelFor(model => model.fechaFin, "Fecha Fin")
-            @Html.EditorFor(model => model.fechaFin, "date")
-
-            <input type="submit" value="Guardar" id="grdRolUsu" name="grdRolUsu" />
+<body class="container col-lg-12 align-content-center align-items-center col-md-12 col-sm-12 col-lg-offset-2 badge-light">
+    <style>
+        input {
+            border: groove;
+            border-radius: 10px 10px;
         }
-    </div>
+
+        #cuerpoFormExt {
+            border: groove 5px;
+            border-radius: 10px 10px;
+        }
+
+        #cuerpoFormInt {
+            border: ridge 3px;
+            border-radius: 8px 8px;
+        }
+
+        #btnReg {
+            border: 4px;
+            transform-style: preserve-3d;
+        }
+        h3{
+            color:aliceblue;
+            text-align:center;
+        }
+    </style>
+    @RenderPage("~/Views/Register/_Header.cshtml")
     <div>
-        @Html.Partial("~//Views//Shared//_Roles.cshtml")
+        <div id="cuerpoFormExt" class="col-lg-8 col-md-8 col-sm-8 input-group-mb-3 text-center offset-2">
+            @using (Html.BeginForm("asignarRol", "Register", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div id="cuerpoFormInt" class="col-6 table-hover table table-striped table-bordered modal-body offset-3">
+                    <h3 class="modal-header bg-primary "><strong> Ingreso rol usuario</strong> </h3>
+                    @Html.LabelFor(model => model.codRol, "Codigo Rol", new { @class = "form-control btn-info" })
+                    @Html.TextBoxFor(model => model.codRol, new { @class = "form-control input-group" })
+                    @Html.ValidationMessageFor(model => model.codRol)
+
+                    @Html.LabelFor(model => model.codUsuario, "Codigo Usuario", new { @class = "form-control btn-info" })
+                    @Html.TextBoxFor(model => model.codUsuario, new { @class = "form-control input-group" })
+                    @Html.ValidationMessageFor(model => model.codUsuario)
+
+                    @Html.LabelFor(model => model.fechaInicio, "Fecha Inicio", new { @class = "form-control btn-info" })
+                    @Html.EditorFor(model => model.fechaInicio, "date", new { @class = "form-control input-group" })
+
+                    @Html.LabelFor(model => model.fechaFin, "Fecha Fin", new { @class = "form-control btn-info" })
+                    @Html.EditorFor(model => model.fechaFin, "date", new { @class = "form-control input-group" })
+                    <br />
+                    <input type="submit" value="Guardar" id="grdRolUsu" name="grdRolUsu" class="btn btn-info shadow" />
+                </div>
+            }
+            <div class="btn btn-info shadow">
+                @Html.Partial("~//Views//Shared//_Roles.cshtml")
+            </div>
+            <div>
+                @Html.ActionLink("Regresar", "Principal", "Principal")
+            </div>
+        </div>
     </div>
 </body>
 </html>

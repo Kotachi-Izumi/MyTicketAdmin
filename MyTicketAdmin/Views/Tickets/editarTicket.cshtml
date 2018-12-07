@@ -9,56 +9,96 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>editarTicket</title>
+    @*<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
+    <!------ Include the above in your HEAD tag ---------->
+    @*<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>*@
+
+    <link href="~/Contenido/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-reboot.min.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="~/Contenido/bootstrap.bundle.js"></script>
+    <script src="~/Contenido/bootstrap.bundle.min.js"></script>
+    <link href="~/Contenido/bootstrap.css" rel="stylesheet" />
+    <script src="~/Contenido/bootstrap.js"></script>
+    <link href="~/Contenido/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Contenido/bootstrap.min.js"></script>
 </head>
-<body>
-    <div> 
-        @using (Html.BeginForm())
+<body  class="container col-lg-12 col-md-12 col-sm-12  badge-light">
+    @RenderPage("~/Views/Register/_Header.cshtml")
+    <style>
+        input{
+            border:groove;
+            border-radius:10px 10px;
+        }
+        #cuerpoFormExt{
+            border:groove 5px;
+            border-radius:10px 10px;
+        }
+        #cuerpoFormInt{
+            border:ridge 3px;
+            border-radius:8px 8px;
+        }
+        #btnReg{
+            border:4px;
+            transform-style:preserve-3d;
+        }
+    </style>
+    <div id="cuerpoFormExt" class="col-lg-6 col-md-6 col-sm-6 input-group-mb-3 text-center offset-3">
+        @using (Html.BeginForm("editarTicket","Tickets",FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
-            @Html.DisplayFor(model => model.codPersona)
-            @Html.DisplayFor(model => model.codTicket)
-            <br />
+            <div id="cuerpoFormInt" class="col-6 table-hover table table-striped table-bordered modal-body offset-3">
+                <h3 class="modal-header bg-primary ">Modificar Ticket</h3>
+                @Html.LabelFor(model => model.codEstadoTicket, "Estado Ticket", htmlAttributes: new { @class = "form-control btn-info" })
+                @Html.EditorFor(model => model.codEstadoTicket, new { @class = "form-control input-group" })
+                @Html.ValidationMessageFor(model => model.codEstadoTicket)
 
-            @Html.LabelFor(model => model.codEstadoTicket,"Estado Ticket")
-            @Html.EditorFor(model => model.codEstadoTicket)
-            @Html.ValidationMessageFor(model => model.codEstadoTicket)
+                @Html.LabelFor(model => model.codGravedad, "Codigo Gravedad", new { @class = "form-control btn-info" })
+                @Html.EditorFor(model => model.codGravedad, new { @class = "form-control input-group" })
+                @Html.ValidationMessageFor(model => model.codGravedad)
 
-            @Html.LabelFor(model => model.codGravedad,"Codigo Gravedad")
-            @Html.EditorFor(model => model.codGravedad)
-            @Html.ValidationMessageFor(model => model.codGravedad)
+                @Html.LabelFor(model => model.codTipoAtencion, "Tipo Atencion", new { @class = "form-control btn-info" })
+                @Html.EditorFor(model => model.codTipoAtencion, new { @class = "form-control input-group" })
+                @Html.ValidationMessageFor(model => model.codTipoAtencion)
 
-            @Html.LabelFor(model => model.codTipoAtencion,"Tipo Atencion")
-            @Html.EditorFor(model => model.codTipoAtencion)
-            @Html.ValidationMessageFor(model => model.codTipoAtencion)
+                @Html.LabelFor(model => model.codUsuarioAsignado, "Usuario Asignado", new { @class = "form-control btn-info" })
+                @Html.EditorFor(model => model.codUsuarioAsignado, new { @class = "form-control input-group" })
 
-            @Html.LabelFor(model => model.codUsuarioAsignado,"Usuario Asignado")
-            @Html.EditorFor(model => model.codUsuarioAsignado)
-            
 
-            @Html.LabelFor(model => model.codUsuarioResponde,"Usuario Responde")
-            @Html.EditorFor(model => model.codUsuarioResponde)
+                @Html.LabelFor(model => model.codUsuarioResponde, "Usuario Responde", new { @class = "form-control btn-info" })
+                @Html.EditorFor(model => model.codUsuarioResponde, new { @class = "form-control input-group" })
 
-            @Html.LabelFor(model => model.descAsunto,"Asunto")
-            @Html.EditorFor(model => model.descAsunto)
-            @Html.ValidationMessageFor(model => model.descAsunto)
+                @Html.LabelFor(model => model.descAsunto, "Asunto", new { @class = "form-control btn-info " })
+                @Html.EditorFor(model => model.descAsunto, new { @class = "form-control input-group" })
+                @Html.ValidationMessageFor(model => model.descAsunto)
 
-            @Html.LabelFor(model => model.detalleTicket,"Descripcion Problema")
-            @Html.TextAreaFor(model => model.detalleTicket)
-            @Html.ValidationMessageFor(model => model.detalleTicket)
+                @Html.LabelFor(model => model.detalleTicket, "Descripcion Problema", new { @class = "form-control btn-info " })
+                @Html.TextAreaFor(model => model.detalleTicket, new { @class = "form-control input-group" })
+                @Html.ValidationMessageFor(model => model.detalleTicket)
 
-            @Html.LabelFor(model => model.esMasivo,"Es masivo")
-            @Html.EditorFor(model => model.esMasivo,"checkbox")
+                @Html.LabelFor(model => model.esMasivo, "Es masivo", new { @class = "form-control btn-info " })
+                @Html.EditorFor(model => model.esMasivo, "checkbox", new { @class = "form-control form-check input-group" })
 
-            @Html.LabelFor(model => model.fechaRespuesta,"Fecha Respuesta")
-            @Html.EditorFor(model => model.fechaRespuesta,"date")
+                @Html.LabelFor(model => model.fechaRespuesta, "Fecha Respuesta", new { @class = "form-control btn-info " })
+                @Html.EditorFor(model => model.fechaRespuesta, "date", new { @class = "form-control input-group" })
 
-            @Html.LabelFor(model => model.fechaVencimiento, "Fecha Vencimiento")
-            @Html.EditorFor(model => model.fechaVencimiento,"date")
+                @Html.LabelFor(model => model.fechaVencimiento, "Fecha Vencimiento", new { @class = "form-control btn-info " })
+                @Html.EditorFor(model => model.fechaVencimiento, "date", new { @class = "form-control input-group" })
+                <br />
+                <input type="submit" value="Editar" id="edtTicket" name="edtTicket" class="btn btn-info shadow" />
+            </div>
+          }
+        </div>
 
-            <input type="submit" value="Editar" id="edtTicket" name="edtTicket" />
-        }
+    <div id="btnReg" class="btn font-weight-bold btn-info">
+        @Html.ActionLink("Regresar", "Index")
     </div>
-    @Html.ActionLink("Regresar","Index")
 </body>
 </html>

@@ -136,6 +136,20 @@
       <DependentUpon>BDMyTicket.edmx</DependentUpon>
       <LastGenOutput>BDMyTicket.cs</LastGenOutput>
     </Content>
+    <Content Include="Contenido\bootstrap-grid.css" />
+    <Content Include="Contenido\bootstrap-grid.min.css" />
+    <Content Include="Contenido\bootstrap-reboot.css" />
+    <Content Include="Contenido\bootstrap-reboot.min.css" />
+    <Content Include="Contenido\bootstrap-theme.css" />
+    <Content Include="Contenido\bootstrap-theme.min.css" />
+    <Content Include="Contenido\bootstrap.bundle.js" />
+    <Content Include="Contenido\bootstrap.bundle.min.js" />
+    <Content Include="Contenido\bootstrap.css" />
+    <Content Include="Contenido\bootstrap.js" />
+    <Content Include="Contenido\bootstrap.min.css" />
+    <Content Include="Contenido\bootstrap.min.js" />
+    <Content Include="Contenido\glyphicons-halflings-regular.svg" />
+    <Content Include="Contenido\npm.js" />
     <Content Include="Estilos\cssRegistro.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\banner.PNG" />
@@ -245,6 +259,23 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Register\IngresoUsuario.cshtml" />
     <Content Include="Views\Register\IngresoRolUsua.cshtml" />
+    <Content Include="Contenido\bootstrap-theme.css.map" />
+    <Content Include="Contenido\bootstrap-theme.min.css.map" />
+    <Content Include="Contenido\bootstrap.css.map" />
+    <Content Include="Contenido\bootstrap.min.css.map" />
+    <Content Include="Contenido\glyphicons-halflings-regular.eot" />
+    <Content Include="Contenido\glyphicons-halflings-regular.ttf" />
+    <Content Include="Contenido\glyphicons-halflings-regular.woff" />
+    <Content Include="Contenido\glyphicons-halflings-regular.woff2" />
+    <Content Include="Contenido\.DS_Store" />
+    <Content Include="Contenido\bootstrap-grid.css.map" />
+    <Content Include="Contenido\bootstrap-grid.min.css.map" />
+    <Content Include="Contenido\bootstrap-reboot.css.map" />
+    <Content Include="Contenido\bootstrap-reboot.min.css.map" />
+    <Content Include="Contenido\bootstrap.bundle.js.map" />
+    <Content Include="Contenido\bootstrap.bundle.min.js.map" />
+    <Content Include="Contenido\bootstrap.js.map" />
+    <Content Include="Contenido\bootstrap.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

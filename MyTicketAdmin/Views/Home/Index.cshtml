@@ -9,44 +9,67 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
-    
+    <link href="~/Contenido/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-grid.min.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-reboot.min.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Contenido/bootstrap.bundle.js"></script>
+    <script src="~/Contenido/bootstrap.bundle.min.js"></script>
+    <script src="~/Contenido/bootstrap.js"></script>
+    <script src="~/Contenido/bootstrap.min.js"></script>
     <link rel="stylesheet" href="~/Estilos/Style1.css" />
 </head>
 <body>
-    <div id="cabecera">
+    @RenderPage("~/Views/Register/_Header.cshtml")
+    <style>
+        input {
+            border: groove;
+            border-radius: 10px 10px;
+        }
+
+        #cuerpoFormExt {
+            border: groove 5px;
+            border-radius: 10px 10px;
+        }
+
+        #cuerpoFormInt {
+            border: ridge 3px;
+            border-radius: 8px 8px;
+            text-align: center;
+            align-content: center;
+        }
+
+        #btnReg {
+            border: 4px;
+            transform-style: preserve-3d;
+        }
+
+        h3 {
+            color: aliceblue;
+            text-align: center;
+        }
+    </style>
+    @*<div id="cabecera">
         <p id="titulo"><strong>My Ticket Admin</strong></p>
-    </div>
-    <header id="headerPrincipal">
-        <table>
-            <!--<tr>
-                <td>
-                    <h3>@Html.ActionLink(" Registro ", "Registro", "Register")</h3>
-                </td>
-                <td>
-                    <h3>@Html.ActionLink(" Rol ", "AsigRol", "Register")</h3>
-                </td>
-            </tr>-->
-        </table>
-    </header>
+    </div>*@
+    
     <div id="login" class="login-cl"> 
-        <form id="frmLogin" class="login-cl" method="post" runat="server" action="\Home\btnEnviar" >
-            <table id="tblLogin" class="login-cl">
-                <tr id="trUp" class="login-cl">
-                    <td><label for="inUsuario"><strong>Usuario:</strong> </label></td>
-                    <td><input type="text" name="inUsuario" id="inUsuario" placeholder="Ingrese usuario" required/></td>
-                </tr>
-                <tr id="trDown" class="login-cl">
-                    <td><label for="inPass"><strong>Contraseña:</strong> </label></td>
-                    <td><input type="password" name="inpPass" id="inPass" placeholder="********" required/></td>
-                </tr>
-                <tr class="login-cl">
-                    <td><input type="checkbox" id="ckbRecUs" /><label for="ckbRecUs" id="lbRecUs">Recordar</label></td>
-                    <td><button type="submit" name="btnEnviar" id="btnEnviar"><strong>Entrar</strong></button></td>
-                </tr>
-                <tr class="login-cl">
-                    <td colspan="2"><label id="lbOlvPass">Olvido su contraseña</label></td>
-                </tr>
-            </table>
+        <form id="frmLogin" class="login-cl " method="post" runat="server" action="\Home\btnEnviar" >
+                    <h3 class="modal-header bg-primary ">Login</h3>
+                    <label for="inUsuario" class="form-control btn-info"><strong>Usuario:</strong> </label>
+                    <input type="text" name="inUsuario" id="inUsuario" placeholder="Ingrese usuario" required class="form-control input-group"/>
+                
+                    <label for="inPass" class="form-control btn-info"><strong>Contraseña:</strong> </label>
+                    <input type="password" name="inpPass" id="inPass" placeholder="********" required class="form-control input-group"/>
+                
+                    @*<input type="checkbox" id="ckbRecUs" /><label for="ckbRecUs" id="lbRecUs">Recordar</label></td>
+                    <button type="submit" name="btnEnviar" id="btnEnviar"><strong>Entrar</strong></button></td>*@
+                
+                <input type="submit" Value="Ingresar" class="btn btn-info shadow"/>
         </form>
     </div>
 </body>

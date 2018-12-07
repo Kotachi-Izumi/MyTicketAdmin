@@ -31,10 +31,12 @@ namespace MyTicketAdmin.Controllers
             }
             
         }
+
         public ActionResult nuevoTicket()
         {          
                 return View();            
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult guardarTicket(MTicket tick)
@@ -59,6 +61,7 @@ namespace MyTicketAdmin.Controllers
             return View(TICK);
             
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult editarTicket(MTicket tickets)

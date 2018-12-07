@@ -15,41 +15,89 @@
 
 <html>
 <head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
-<body>
-    <div>
-        @using (Html.BeginForm("Index","Tickets",FormMethod.Post))
+<body class="col-lg-12 col-md-10">
+    @RenderPage("~/Views/Register/_Header.cshtml")
+    <style>
+       
+    </style>
+    <br />
+    <br />
+    <div class="container col-lg-4 align-items-lg-start">
+        @using (Html.BeginForm("Index", "Tickets", FormMethod.Post))
         {
-           <label for="busqIdCliente">Ingrese Id Cliente</label>
-           <input type="number" id="busqIdCliente" name="busqIdCliente" placeholder="Id Cliente" required />
-           
-           <input type="submit" value="Buscar" id="buscarTCliente" name="buscarTCliente" />
+            <label for="busqIdCliente" class="col-form-label">Ingrese Id Cliente</label>
+            <input type="number" id="busqIdCliente" name="busqIdCliente" placeholder="Id Cliente" required class="form-control input-md" />
+
+            <input type="submit" value="Buscar" id="buscarTCliente" name="buscarTCliente" class="btn form_control" />
         }
     </div>
-    <div>
-        
-        @Html.DisplayFor(model => model.codPersona)
-        @Html.DisplayFor(model => model.nombre)
-        @Html.DisplayFor(model => model.apPaterno)
-        @Html.DisplayFor(model => model.apMaterno)
-        @Html.DisplayFor(model => model.email)
-        @Html.DisplayFor(model => model.fono)
-        @Html.DisplayFor(model => model.cel)
+    <br />
+    <div class="table-responsive col-8" id="DTblCliente">
+        <table id="tblCliente" class="table-bordered table table-striped table-lg-10 table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th id="thCodPer">Cod Persona</th>
+                    <th>Nombre</th>
+                    <th>A.Paterno</th>
+                    <th>A.Materno</th>
+                    <th>Email</th>
+                    <th>Fono</th>
+                    <th>Cel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.codPersona)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.apPaterno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.apMaterno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.fono)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.cel)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+    <br />
     <div>
         @if (Model != null)
         {
-           
-            @Html.ActionLink("Nuevo Ticket", "nuevoTicket", "Tickets")
-           
+            <div class="btn badge-dark btn-default">
+                @Html.ActionLink("Nuevo Ticket", "nuevoTicket", "Tickets")
+            </div>
+
         }
-           </div>
-    <div> 
-       @if(Model != null) { 
-        <table>
-            <thead>
+    </div>
+    <br />
+    <div class="col-lg-12 table-responsive">
+        @if (Model != null)
+        {
+            <table class="table-hover table table-striped table-bordered">
+                <thead class="thead-light">
                     <tr>
                         <th>Codigo Estado</th>
                         <th>Codigo Gravedad</th>
@@ -61,52 +109,55 @@
                         <th>Es Masivo</th>
                         <th>Fecha Respuesta</th>
                         <th>Fecha Vencimiento</th>
+                        <th></th>
                     </tr>
-            </thead>
-            <tbody>
-               @foreach (var item in tickets)
-               {
-                   <tr>
-                       <td>
-                           @item.ticket_est_ticket
-                       </td>
-                       <td>
-                           @item.ticket_cod_gravedad
-                       </td>
-                       <td>
-                           @item.ticket_cod_ticket
-                       </td>
-                       <td>
-                           @item.ticket_cod_tipoatencion
-                       </td>
-                       <td>
-                           @item.ticket_cod_usuaingreso
-                       </td>
-                       <td>
-                           @item.ticket_dsc_asunto
-                       </td>
-                       <td>
-                           @item.ticket_dsc_detalle
-                       </td>
-                       <td>
-                           @item.ticket_es_masivo
-                       </td>
-                       <td>
-                           @item.ticket_fec_respuesta
-                       </td>
-                       <td>
-                           @item.ticket_fec_vencimiento
-                       </td>
-                       <td>
-                           @Html.ActionLink("Editar", "editarTicket", new { id = item.ticket_cod_ticket })
-                       </td>
-                   </tr>
-               }
-            </tbody>
-        </table>
-       }
-
+                </thead>
+                <tbody>
+                    @foreach (var item in tickets)
+                    {
+                        <tr>
+                            <td>
+                                @item.ticket_est_ticket
+                            </td>
+                            <td>
+                                @item.ticket_cod_gravedad
+                            </td>
+                            <td>
+                                @item.ticket_cod_ticket
+                            </td>
+                            <td>
+                                @item.ticket_cod_tipoatencion
+                            </td>
+                            <td>
+                                @item.ticket_cod_usuaingreso
+                            </td>
+                            <td>
+                                @item.ticket_dsc_asunto
+                            </td>
+                            <td>
+                                @item.ticket_dsc_detalle
+                            </td>
+                            <td>
+                                @item.ticket_es_masivo
+                            </td>
+                            <td>
+                                @item.ticket_fec_respuesta
+                            </td>
+                            <td>
+                                @item.ticket_fec_vencimiento
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "editarTicket", new { id = item.ticket_cod_ticket })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     </div>
-    @Html.ActionLink("Principal","Principal","Principal")
+    <br />
+    <div class="btn badge-dark btn-default">
+        @Html.ActionLink("Principal", "Principal", "Principal")
+    </div>
 </body>
 </html>

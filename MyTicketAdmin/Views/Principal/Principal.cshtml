@@ -10,42 +10,84 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Principal</title>
-    <link rel="stylesheet" href="~/Estilos/cssRegistro.css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link href="~/Contenido/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-grid.min.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-reboot.min.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap.css" rel="stylesheet" />
+    <link href="~/Contenido/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Contenido/bootstrap.bundle.js"></script>
+    <script src="~/Contenido/bootstrap.bundle.min.js"></script>
+    <script src="~/Contenido/bootstrap.js"></script>
+    <script src="~/Contenido/bootstrap.min.js"></script>
 </head>
-<body>
-   
-    <div id="pos">
-        <h1>Panel de control</h1>
-    </div>
-    <div id="cuerpoCentral" class="central">
-        <aside id="menuLat">
-            <h1><Strong>Menu</Strong></h1>
-            
-            <ul>
-                <li> <a href="../Register/IngresoPersona"  target="ifInfo">xxxxIngresar persona</a></li>
-                <li>@Html.ActionLink("Ingresar persona","IngresoPersona","Register")</li>
-                <li>@Html.ActionLink("Ingresar Direccion", "IngresoDireccion", "Register")</li>
-                <li>@Html.ActionLink("Registrar usuario","IngresoUsuario","Register")</li>
-                <li>@Html.ActionLink("Registrar Rol Usuario","IngresoRolUsua","Register")</li>
-                <li>@Html.ActionLink("Tickets","Index","Tickets")</li>
-                <li>Eliminacion usuario</li>
-                <li>Modificacion usuario</li>
-                <li></li>
-                <li>Reporte de actividad</li>
-                <li>@Html.ActionLink("btnMail", "../Principal/btnMail")</li>
-                <li>Salir</li>
-            </ul>
-        </aside> 
-        <div id="cuerpoInfo" name="cuerpoInfo">
-            <iframe id="ifInfo" name="ifInfo"></iframe>
+<body class="container-fluid col-lg-12 col-md-12 col-sm-12">
+    <style>
+        body{
+            border-radius:10px 10px;
+        }
+        li{
+            font-size:14px;
+            font-weight:bolder;
+            border-radius:10px 10px;
+        }
+       #titlePrin{
+           border:6px ;
+           background-color:brown;
+           text-align:center;
+            border-radius:10px 10px;
+       }
+       #pos{
+           color:brown;
+            border-radius:10px 10px;
+       
+       }
+       h1{
+           color:khaki;
+           border-radius:10px 10px;
+           text-align:center;
+       }
+    </style>
+    <div id="titlePrin" class="row col-12">
+        <div id="pos" class="row col-6 offset-4">
+            <h1 class="shadow"><strong>Panel de control</strong></h1>
         </div>
     </div>
-    <div>
-        
+        <div id="cuerpoCentral" class="row col-lg-12 col-md-12 col-sm-12">
+            <aside id="menuLat" class="col-lg-4 " role="menu">
+                <br />
+                <h1 class="btn-info"><Strong>Menu</Strong></h1>
+                <div>
+                    <ul class="btn btn-info list-group modal-body">
+                        <li class="list-group-item modal-content">@Html.ActionLink("Ingresar persona", "IngresoPersona", "Register")</li>
+                        <li class="list-group-item modal-content">@Html.ActionLink("Ingresar Direccion", "IngresoDireccion", "Register")</li>
+                        <li class="list-group-item modal-content">@Html.ActionLink("Registrar usuario", "IngresoUsuario", "Register")</li>
+                        <li class="list-group-item modal-content">@Html.ActionLink("Registrar Rol Usuario", "IngresoRolUsua", "Register")</li>
+                        <li class="list-group-item modal-content">@Html.ActionLink("Tickets", "Index", "Tickets")</li>
+                        <li class="list-group-item modal-content">@Html.ActionLink("btnMail", "../Principal/btnMail")</li>
+                        <li class="list-group-item modal-content">@Html.ActionLink("Salir","Index","Home")</li>
+                    </ul>
+                </div>
+            </aside>
+            <br />
+            <br />
+            <br />
+            @*<div id="cuerpoInfo" name="cuerpoInfo" class="col-lg-8">
+                    <iframe id="ifInfo" name="ifInfo"></iframe>
+                </div>*@
+        </div>
+    @*<div>
             <input type="button" value="Enviar" id="btnMail" name="btnMail" onclick="@Url.Action("btnMail", "//Principal");" />
-            
-        
-        
-    </div>
+    </div>*@
 </body>
 </html>
