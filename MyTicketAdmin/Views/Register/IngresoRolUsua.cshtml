@@ -58,20 +58,22 @@
                 <div id="cuerpoFormInt" class="col-6 table-hover table table-striped table-bordered modal-body offset-3">
                     <h3 class="modal-header bg-primary "><strong> Ingreso rol usuario</strong> </h3>
                     @Html.LabelFor(model => model.codRol, "Codigo Rol", new { @class = "form-control btn-info" })
-                    @Html.TextBoxFor(model => model.codRol, new { @class = "form-control input-group" })
-                    @Html.ValidationMessageFor(model => model.codRol)
+                    @Html.TextBoxFor(model => model.codRol, new { @class = "form-control input-group", placeholder="" })
+                    @Html.ValidationMessageFor(model => model.codRol, "", new { @class = "text-danger" })
 
                     @Html.LabelFor(model => model.codUsuario, "Codigo Usuario", new { @class = "form-control btn-info" })
                     @Html.TextBoxFor(model => model.codUsuario, new { @class = "form-control input-group" })
-                    @Html.ValidationMessageFor(model => model.codUsuario)
+                    @Html.ValidationMessageFor(model => model.codUsuario, "", new { @class = "text-danger" })
 
-                    @Html.LabelFor(model => model.fechaInicio, "Fecha Inicio", new { @class = "form-control btn-info" })
-                    @Html.EditorFor(model => model.fechaInicio, "date", new { @class = "form-control input-group" })
+                    @*@Html.LabelFor(model => model.fechaInicio, "Fecha Inicio", new { @class = "form-control btn-info" })
+                    @Html.EditorFor(model => model.fechaInicio, "date", new { @class = "form-control input-group" })*@
 
                     @Html.LabelFor(model => model.fechaFin, "Fecha Fin", new { @class = "form-control btn-info" })
                     @Html.EditorFor(model => model.fechaFin, "date", new { @class = "form-control input-group" })
+                    @Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
                     <br />
                     <input type="submit" value="Guardar" id="grdRolUsu" name="grdRolUsu" class="btn btn-info shadow" />
+                    
                 </div>
             }
             <div class="btn btn-info shadow">

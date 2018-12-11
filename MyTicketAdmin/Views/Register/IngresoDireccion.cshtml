@@ -57,17 +57,17 @@
                     @Html.ValidationMessageFor(model => model.DescCasa)
 
                     @Html.LabelFor(Model => Model.NumCasa, "No casa", new { @class = "form-control btn-info" })
-                    @Html.TextBoxFor(Model => Model.NumCasa, new { @class = "form-control input-group" })
+                    @Html.TextBoxFor(Model => Model.NumCasa, new { @class = "form-control input-group", style="Required"})
                     @Html.ValidationMessageFor(model => model.NumCasa)
                     <label for="regiones" class="form-control btn-info">Seleccione region</label>
-                    <select id="regiones" name="regiones" class="">
+                    <select id="regiones" name="regiones" class="" required>
                         @foreach (var reg in regiones)
                 {
                             <option value="@reg">@reg</option>
                         }
                     </select>
                     <label for="comunas" class="form-control btn-info">Seleccione comuna</label>
-                    <select id="comunas" name="comunas">
+                    <select id="comunas" name="comunas" required>
                         @foreach (var com in comunas)
                 {
                             <option value="@com">@com</option>

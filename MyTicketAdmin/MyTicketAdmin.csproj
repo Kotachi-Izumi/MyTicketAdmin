@@ -256,7 +256,6 @@
     <Content Include="Views\Shared\_Areas.cshtml" />
     <Content Include="Views\Tickets\nuevoTicket.cshtml" />
     <Content Include="Views\Tickets\editarTicket.cshtml" />
-    <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Register\IngresoUsuario.cshtml" />
     <Content Include="Views\Register\IngresoRolUsua.cshtml" />
     <Content Include="Contenido\bootstrap-theme.css.map" />

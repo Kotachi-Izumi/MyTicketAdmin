@@ -14,7 +14,6 @@ namespace MyTicketAdmin
     
     public partial class mt_tab_ticket
     {
-        public long ticket_cod_ticket { get; set; }
         public Nullable<System.DateTime> ticket_fec_creacion { get; set; }
         public Nullable<System.DateTime> ticket_fec_respuesta { get; set; }
         public Nullable<long> ticket_cod_usuaingreso { get; set; }
@@ -28,5 +27,6 @@ namespace MyTicketAdmin
         public Nullable<long> ticket_cod_gravedad { get; set; }
         public Nullable<long> usuarioasig_cod_usuarioasign { get; set; }
         public long ticket_cod_per { get; set; }
+        public int ticket_cod_ticket { get; set; }
     }
 }

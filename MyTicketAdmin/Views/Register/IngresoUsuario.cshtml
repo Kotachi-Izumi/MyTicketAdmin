@@ -53,20 +53,26 @@
         <div id="cuerpoFormExt" class="col-lg-8 col-md-8 col-sm-8 input-group-mb-3 text-center offset-2">
             @using (Html.BeginForm("guardarUsuario", "Register", FormMethod.Post))
             {
+                @Html.AntiForgeryToken()
                 <div id="cuerpoFormInt" class="col-6 table-hover table table-striped table-bordered modal-body offset-3">
                     <h3 class="modal-header bg-primary "><strong> Ingreso usuario</strong> </h3>
+                    @Html.ValidationMessageFor(model => model.codArea, "", new { @class = "text-danger" })
                     @Html.LabelFor(model => model.codArea, "Codigo Area", new { @class = "form-control btn-info" })
                     @Html.TextBoxFor(model => model.codArea, new { @class = "form-control input-group" })
 
+                    @Html.ValidationMessageFor(model => model.codEstado, "", new { @class = "text-danger" })
                     @Html.LabelFor(model => model.codEstado, "Codigo Estado", new { @class = "form-control btn-info" })
                     @Html.TextBoxFor(model => model.codEstado, new { @class = "form-control input-group" })
 
+                    @Html.ValidationMessageFor(model => model.codPersona, "", new { @class = "text-danger" })
                     @Html.LabelFor(model => model.codPersona, "Codigo Persona", new { @class = "form-control btn-info" })
                     @Html.TextBoxFor(model => model.codPersona, new { @class = "form-control input-group" })
 
+                    @Html.ValidationMessageFor(model => model.nick, "", new { @class = "text-danger" })
                     @Html.LabelFor(model => model.nick, "NickName", new { @class = "form-control btn-info" })
                     @Html.TextBoxFor(model => model.nick, new { @class = "form-control input-group" })
 
+                    @Html.ValidationMessageFor(model => model.pass, "", new { @class = "text-danger" })
                     @Html.LabelFor(model => model.pass, "Password", new { @class = "form-control btn-info" })
                     @Html.EditorFor(model => model.pass, "password", new { @class = "form-control input-group" })
                     <br />

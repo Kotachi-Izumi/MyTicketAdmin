@@ -41,8 +41,13 @@ namespace MyTicketAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult guardarTicket(MTicket tick)
         {
-            ConPG.ingresarTicket(tick);
-            return View("~\\Views\\Tickets\\Index.cshtml");
+            if (ModelState.IsValid)
+            {
+                ConPG.ingresarTicket(tick);
+                return View("~\\Views\\Tickets\\Index.cshtml");
+            }
+            return View("~\\Views\\Tickets\\nuevoTicket.cshtml",tick);
+
         }
         
         
@@ -66,11 +71,15 @@ namespace MyTicketAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult editarTicket(MTicket tickets)
         {
-             var pg = new ConPG();
-            if(pg.updateTicket(tickets) > 0)
+            if (ModelState.IsValid)
             {
-                return View("~\\Views\\Tickets\\Index.cshtml");
+                var pg = new ConPG();
+                if (pg.updateTicket(tickets) > 0)
+                {
+                    return View("~\\Views\\Tickets\\Index.cshtml");
+                }
             }
+            
             /*var ticket = ConPG.editTicket(tickets);
             var tick = bd.mt_tab_ticket.Find(tickets.codTicket);
             tick = ticket;

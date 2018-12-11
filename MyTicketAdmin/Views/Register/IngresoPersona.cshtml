@@ -45,39 +45,39 @@
                 <h3 class="modal-header bg-primary ">Ingreso Persona</h3>
                 @Html.LabelFor(Model => Model.nombre, "Nombre", new { @class = "form-control btn-info" })
                 @Html.TextBoxFor(Model => Model.nombre, new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.nombre)
+                @Html.ValidationMessageFor(model => model.nombre,"",new { @class="text-danger"})
 
                 @Html.LabelFor(model => model.AppPaterno, "Primer Apellido", new { @class = "form-control btn-info" })
                 @Html.TextBoxFor(model => model.AppPaterno, new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.AppPaterno)
+                @Html.ValidationMessageFor(model => model.AppPaterno, "", new { @class = "text-danger" })
 
                 @Html.LabelFor(model => model.AppMaterno, "Segundo Apellido", new { @class = "form-control btn-info" })
                 @Html.TextBoxFor(model => model.AppMaterno, new { @class = "form-control input-group" })
 
                 @Html.LabelFor(model => model.Rut, "Rut", new { @class = "form-control btn-info" })
-                @Html.TextBoxFor(model => model.Rut, new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.Rut)
+                @Html.TextBoxFor(model => model.Rut, new { @class = "form-control input-group", maxlength = "8" })
+                @Html.ValidationMessageFor(model => model.Rut, "", new { @class = "text-danger" })
 
                 @Html.LabelFor(model => model.DV, "Digito Verificador", new { @class = "form-control btn-info" })
                 @Html.TextBoxFor(model => model.DV, new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.DV)
+                @Html.ValidationMessageFor(model => model.DV, "", new { @class = "text-danger" })
 
                 @Html.LabelFor(model => model.Fnac, "Fecha Nacimiento", new { @class = "form-control btn-info" })
-                @Html.EditorFor(model => model.Fnac, "date", new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.Fnac)
+                @Html.EditorFor(model => model.Fnac, "date", new { @class = "form-control input-group" })<br />
+                @Html.ValidationMessageFor(model => model.Fnac, "", new { @class = "text-danger" })
 
                 @Html.LabelFor(model => model.Fono, "Telefono Fijo", new { @class = "form-control btn-info" })
-                @Html.EditorFor(model => model.Fono, "tel", new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.Fono)
+                @Html.EditorFor(model => model.Fono, "tel", new { @class = "form-control input-group" })<br />
+                @Html.ValidationMessageFor(model => model.Fono, "", new { @class = "text-danger" })
 
                 @Html.LabelFor(model => model.Celular, "Celular", new { @class = "form-control btn-info" })
-                @Html.EditorFor(model => model.Celular, "tel", new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.Celular)
+                @Html.EditorFor(model => model.Celular, "tel", new { @class = "form-control input-group" })<br />
+                @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })
 
                 @Html.LabelFor(model => model.Mail, "Email", new { @class = "form-control btn-info" })
-                @Html.EditorFor(model => model.Mail, "email", new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.Mail)
-
+                @Html.EditorFor(model => model.Mail, "email", new { @class = "form-control input-group" })<br />
+                @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
+               
                 <br />
                 <input type="submit" value="Enviar" class="btn btn-info shadow" />
             </div>

@@ -71,8 +71,7 @@ namespace MyTicketAdmin.Controllers
                 foreach (var item in lst)
                 {
                     rol = (int)item.rol_cod_rol;
-                }
-             
+                }             
             }
             return rol;
         }
@@ -249,7 +248,7 @@ namespace MyTicketAdmin.Controllers
                     rol_cod_rol = mRolUsu.codRol,
                     usuario_cod_usuario = mRolUsu.codUsuario,
                     rolusua_fec_fin = mRolUsu.fechaFin,
-                    rolusua_fec_ini = mRolUsu.fechaInicio
+                    rolusua_fec_ini = DateTime.Now
                 };
                 mt.mt_tab_rolusua.Add(mtRolUsua);
                 mt.SaveChanges();
@@ -288,7 +287,8 @@ namespace MyTicketAdmin.Controllers
                     persona_num_fono = per.Fono,
                     persona_num_rut = per.Rut,
                     persona_num_dv = per.DV,
-                    direccion_cod_direccion = per.CodDireccion
+                    direccion_cod_direccion = per.CodDireccion,
+                    persona_dsc_mail = per.Mail
                 };
 
                 myticket.mt_tab_persona.Add(mtPer);

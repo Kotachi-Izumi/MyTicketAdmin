@@ -31,30 +31,30 @@
                 <h3 class="modal-header bg-primary "><strong> Ingreso usuario</strong> </h3>
                 @Html.LabelFor(model => model.codEstadoTicket, "Estado Ticket", new { @class = "form-control btn-info" })
                 @Html.EditorFor(model => model.codEstadoTicket, new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.codEstadoTicket)
+                @Html.ValidationMessageFor(model => model.codEstadoTicket,"", new { @class="text-danger"})
 
                 @Html.LabelFor(model => model.codGravedad, "Codigo Gravedad", new { @class = "form-control btn-info" })
                 @Html.EditorFor(model => model.codGravedad, new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.codGravedad)
+                @Html.ValidationMessageFor(model => model.codGravedad, "", new { @class = "text-danger" })
 
                 @Html.LabelFor(model => model.codPersona, "Codigo Persona", new { @class = "form-control btn-info" })
                 @Html.EditorFor(model => model.codPersona, new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.codPersona)
+                @Html.ValidationMessageFor(model => model.codPersona, "", new { @class = "text-danger" })
 
-                @Html.LabelFor(model => model.codTicket, "Codigo Ticket", new { @class = "form-control btn-info" })
-                @Html.EditorFor(model => model.codTicket, new { @class = "form-control input-group" })
+                @*@Html.LabelFor(model => model.codTicket, "Codigo Ticket", new { @class = "form-control btn-info" })
+                @Html.EditorFor(model => model.codTicket, new { @class = "form-control input-group" })*@
 
                 @Html.LabelFor(model => model.codTipoAtencion, "Tipo Atencion", new { @class = "form-control btn-info" })
                 @Html.EditorFor(model => model.codTipoAtencion, new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.codTipoAtencion)
+                @Html.ValidationMessageFor(model => model.codTipoAtencion, "", new { @class = "text-danger" })
 
                 @Html.LabelFor(model => model.descAsunto, "Asunto", new { @class = "form-control btn-info" })
                 @Html.EditorFor(model => model.descAsunto, new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.descAsunto)
+                @Html.ValidationMessageFor(model => model.descAsunto, "", new { @class = "text-danger" })
 
                 @Html.LabelFor(model => model.detalleTicket, "Descripcion Problema", new { @class = "form-control btn-info" })
                 @Html.TextAreaFor(model => model.detalleTicket, new { @class = "form-control input-group" })
-                @Html.ValidationMessageFor(model => model.detalleTicket)
+                @Html.ValidationMessageFor(model => model.detalleTicket, "", new { @class = "text-danger" })
 
                 @Html.LabelFor(model => model.esMasivo,"Es masivo", new { @class = "form-control btn-info" })
                 @Html.EditorFor(model => model.esMasivo, "checkbox", new { @class = "form-control input-group" })

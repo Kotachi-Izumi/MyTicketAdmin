@@ -78,7 +78,6 @@
           <Key>
             <PropertyRef Name="ticket_cod_ticket" />
           </Key>
-          <Property Name="ticket_cod_ticket" Type="int8" Nullable="false" />
           <Property Name="ticket_fec_creacion" Type="timestamp" />
           <Property Name="ticket_fec_respuesta" Type="timestamp" />
           <Property Name="ticket_cod_usuaingreso" Type="int8" />
@@ -92,6 +91,7 @@
           <Property Name="ticket_cod_gravedad" Type="int8" />
           <Property Name="usuarioasig_cod_usuarioasign" Type="int8" />
           <Property Name="ticket_cod_per" Type="int8" Nullable="false" />
+          <Property Name="ticket_cod_ticket" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="mt_tab_usuario">
           <Key>
@@ -227,6 +227,7 @@
         <EntityContainer Name="myticketEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="mt_tab_areas" EntityType="myticketModel.mt_tab_areas" />
           <EntitySet Name="mt_tab_comuna" EntityType="myticketModel.mt_tab_comuna" />
+          <EntitySet Name="mt_tab_direccion" EntityType="myticketModel.mt_tab_direccion" />
           <EntitySet Name="mt_tab_persona" EntityType="myticketModel.mt_tab_persona" />
           <EntitySet Name="mt_tab_region" EntityType="myticketModel.mt_tab_region" />
           <EntitySet Name="mt_tab_rol" EntityType="myticketModel.mt_tab_rol" />
@@ -234,7 +235,6 @@
           <EntitySet Name="mt_tab_ticket" EntityType="myticketModel.mt_tab_ticket" />
           <EntitySet Name="mt_tab_usuario" EntityType="myticketModel.mt_tab_usuario" />
           <EntitySet Name="pruebas" EntityType="myticketModel.prueba" />
-          <EntitySet Name="mt_tab_direccion" EntityType="myticketModel.mt_tab_direccion" />
           <AssociationSet Name="fk_areas" Association="myticketModel.fk_areas">
             <End Role="mt_tab_areas" EntitySet="mt_tab_areas" />
             <End Role="mt_tab_usuario" EntitySet="mt_tab_usuario" />
@@ -280,6 +280,16 @@
           <Property Name="comuna_fin_vigencia" Type="Time" Precision="6" />
           <NavigationProperty Name="mt_tab_region" Relationship="myticketModel.fk_com_region" FromRole="mt_tab_comuna" ToRole="mt_tab_region" />
           <NavigationProperty Name="mt_tab_direccion" Relationship="myticketModel.fk_dir_com" FromRole="mt_tab_comuna" ToRole="mt_tab_direccion" />
+        </EntityType>
+        <EntityType Name="mt_tab_direccion">
+          <Key>
+            <PropertyRef Name="direccion_cod_direccion" />
+          </Key>
+          <Property Name="direccion_dsc_direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_num_direccion" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="comuna_cod_comuna" Type="Int64" />
+          <Property Name="direccion_cod_direccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="mt_tab_comuna" Relationship="myticketModel.fk_dir_com" FromRole="mt_tab_direccion" ToRole="mt_tab_comuna" />
         </EntityType>
         <EntityType Name="mt_tab_persona">
           <Key>
@@ -332,7 +342,6 @@
           <Key>
             <PropertyRef Name="ticket_cod_ticket" />
           </Key>
-          <Property Name="ticket_cod_ticket" Type="Int64" Nullable="false" />
           <Property Name="ticket_fec_creacion" Type="DateTime" Precision="6" />
           <Property Name="ticket_fec_respuesta" Type="DateTime" Precision="6" />
           <Property Name="ticket_cod_usuaingreso" Type="Int64" />
@@ -346,6 +355,7 @@
           <Property Name="ticket_cod_gravedad" Type="Int64" />
           <Property Name="usuarioasig_cod_usuarioasign" Type="Int64" />
           <Property Name="ticket_cod_per" Type="Int64" Nullable="false" />
+          <Property Name="ticket_cod_ticket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="mt_tab_usuario">
           <Key>
@@ -368,16 +378,6 @@
           </Key>
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="apellidos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="mt_tab_direccion">
-          <Key>
-            <PropertyRef Name="direccion_cod_direccion" />
-          </Key>
-          <Property Name="direccion_dsc_direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="direccion_num_direccion" Type="Decimal" Precision="10" Scale="0" />
-          <Property Name="comuna_cod_comuna" Type="Int64" />
-          <Property Name="direccion_cod_direccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="mt_tab_comuna" Relationship="myticketModel.fk_dir_com" FromRole="mt_tab_direccion" ToRole="mt_tab_comuna" />
         </EntityType>
         <Association Name="fk_areas">
           <End Type="myticketModel.mt_tab_areas" Role="mt_tab_areas" Multiplicity="0..1" />
@@ -477,6 +477,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="mt_tab_direccion">
+            <EntityTypeMapping TypeName="myticketModel.mt_tab_direccion">
+              <MappingFragment StoreEntitySet="mt_tab_direccion">
+                <ScalarProperty Name="direccion_cod_direccion" ColumnName="direccion_cod_direccion" />
+                <ScalarProperty Name="comuna_cod_comuna" ColumnName="comuna_cod_comuna" />
+                <ScalarProperty Name="direccion_num_direccion" ColumnName="direccion_num_direccion" />
+                <ScalarProperty Name="direccion_dsc_direccion" ColumnName="direccion_dsc_direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="mt_tab_persona">
             <EntityTypeMapping TypeName="myticketModel.mt_tab_persona">
               <MappingFragment StoreEntitySet="mt_tab_persona">
@@ -526,6 +536,7 @@
           <EntitySetMapping Name="mt_tab_ticket">
             <EntityTypeMapping TypeName="myticketModel.mt_tab_ticket">
               <MappingFragment StoreEntitySet="mt_tab_ticket">
+                <ScalarProperty Name="ticket_cod_ticket" ColumnName="ticket_cod_ticket" />
                 <ScalarProperty Name="ticket_cod_per" ColumnName="ticket_cod_per" />
                 <ScalarProperty Name="usuarioasig_cod_usuarioasign" ColumnName="usuarioasig_cod_usuarioasign" />
                 <ScalarProperty Name="ticket_cod_gravedad" ColumnName="ticket_cod_gravedad" />
@@ -539,7 +550,6 @@
                 <ScalarProperty Name="ticket_cod_usuaingreso" ColumnName="ticket_cod_usuaingreso" />
                 <ScalarProperty Name="ticket_fec_respuesta" ColumnName="ticket_fec_respuesta" />
                 <ScalarProperty Name="ticket_fec_creacion" ColumnName="ticket_fec_creacion" />
-                <ScalarProperty Name="ticket_cod_ticket" ColumnName="ticket_cod_ticket" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -561,16 +571,6 @@
               <MappingFragment StoreEntitySet="prueba">
                 <ScalarProperty Name="apellidos" ColumnName="apellidos" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mt_tab_direccion">
-            <EntityTypeMapping TypeName="myticketModel.mt_tab_direccion">
-              <MappingFragment StoreEntitySet="mt_tab_direccion">
-                <ScalarProperty Name="direccion_cod_direccion" ColumnName="direccion_cod_direccion" />
-                <ScalarProperty Name="comuna_cod_comuna" ColumnName="comuna_cod_comuna" />
-                <ScalarProperty Name="direccion_num_direccion" ColumnName="direccion_num_direccion" />
-                <ScalarProperty Name="direccion_dsc_direccion" ColumnName="direccion_dsc_direccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

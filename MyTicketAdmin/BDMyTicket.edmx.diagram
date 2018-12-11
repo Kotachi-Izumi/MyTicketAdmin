@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="181d520c69444700bbd8de8fed9fe5a8" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="myticketModel.mt_tab_areas" Width="1.5" PointX="0.75" PointY="5.875" />
+      <Diagram DiagramId="181d520c69444700bbd8de8fed9fe5a8" Name="Diagram1" ZoomLevel="54">
+        <EntityTypeShape EntityType="myticketModel.mt_tab_areas" Width="1.5" PointX="0.75" PointY="1.625" />
         <EntityTypeShape EntityType="myticketModel.mt_tab_comuna" Width="1.5" PointX="8" PointY="5" />
-        <EntityTypeShape EntityType="myticketModel.mt_tab_persona" Width="1.5" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="myticketModel.mt_tab_region" Width="1.5" PointX="5.75" PointY="5.25" />
-        <EntityTypeShape EntityType="myticketModel.mt_tab_rol" Width="1.5" PointX="3" PointY="5.875" />
-        <EntityTypeShape EntityType="myticketModel.mt_tab_rolusua" Width="1.5" PointX="5.25" PointY="1.5" />
-        <EntityTypeShape EntityType="myticketModel.mt_tab_ticket" Width="1.5" PointX="0.75" PointY="8.75" />
-        <EntityTypeShape EntityType="myticketModel.mt_tab_usuario" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="myticketModel.prueba" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="myticketModel.mt_tab_direccion" Width="1.5" PointX="10.25" PointY="5.25" />
+        <EntityTypeShape EntityType="myticketModel.mt_tab_persona" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="myticketModel.mt_tab_region" Width="1.5" PointX="5.75" PointY="5.25" />
+        <EntityTypeShape EntityType="myticketModel.mt_tab_rol" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="myticketModel.mt_tab_rolusua" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="myticketModel.mt_tab_ticket" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="myticketModel.mt_tab_usuario" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="myticketModel.prueba" Width="1.5" PointX="7.75" PointY="0.75" />
         <AssociationConnector Association="myticketModel.fk_areas" />
         <AssociationConnector Association="myticketModel.fk_com_region" />
         <AssociationConnector Association="myticketModel.fk_dir_com" />

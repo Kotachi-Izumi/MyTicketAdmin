@@ -14,7 +14,7 @@ namespace MyTicketAdmin.Controllers
         // GET: Register
         public ActionResult Index()
         {
-            return View();
+            return View("~\\Views\\Principal\\Principal.cshtml");
         }
         public ActionResult Registro()
         {
@@ -29,7 +29,10 @@ namespace MyTicketAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult guardarPersona(MPersona per)
         {
-            
+            if (!ModelState.IsValid)
+            {
+                return View("~\\Views\\Register\\IngresoPersona.cshtml", per);
+            }
             per.CodDireccion = ConPG.codDireccion();
             ConPG.ingresarPersona(per);
             return View("~\\Views\\Principal\\Principal.cshtml");
@@ -50,10 +53,14 @@ namespace MyTicketAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult guardarDireccion(MDireccion dir)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("~\\Views\\Register\\IngresoDireccion.cshtml", dir);
+            }
             nomComuna = Request.Form["comunas"].ToString();
             dir.CodComuna = ConPG.codComuna(nomComuna);
             ConPG.ingresarDireccion(dir);
-            return View("~\\Views\\Principal\\Principal.cshtml");
+            return RedirectToAction("IngresoPersona");
         }
 
         [HttpGet]
@@ -66,10 +73,10 @@ namespace MyTicketAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult guardarUsuario(MUsuario user)
         {
-            if(user != null)
+            if(ModelState.IsValid)
             {
                 ConPG.ingresarUsuario(user);
-                return View("~\\Views\\Register\\Index.cshtml");
+                return View("~\\Views\\Principal\\Principal.cshtml");
             }
             else
             {
@@ -88,11 +95,21 @@ namespace MyTicketAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult asignarRol(MRolUsuario rolUsu)
         {
-            if(rolUsu != null)
+            try
             {
-                ConPG.ingresarRolUsua(rolUsu);
+                if (ModelState.IsValid)
+                {
+                    ConPG.ingresarRolUsua(rolUsu);
+                    return View("~\\Views\\Principal\\Principal.cshtml");
+                }
             }
-            return View("~\\Views\\Register\\Index.cshtml");
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+            return View("~\\Views\\Register\\IngresoRolUsua.cshtml",rolUsu);
         }
         
     }
